@@ -1,0 +1,20 @@
+// Merge arrays wihtout concat
+// var arr1 = ["Vijendra", "Singh"];
+// var arr2 = ["Singh", "Shakya"];
+// var arr3 = [...new Set([...arr1 ,...arr2])];
+// console.log(arr3)
+
+function merge(a, b) {
+    var hash = {}, i;
+    for (i=0; i<a.length; i++) {
+        hash[a[i]]=true;
+    } 
+    for (i=0; i<b.length; i++) {
+        hash[b[i]]=true;
+    } 
+    return Object.keys(hash).map(Number);
+}
+
+let Arrays = [1,4,67,-29,45,9,0,-12,-4,9,0,6,3,2]
+let arrays2 = [5,34,3,22,-20,-7,9]
+console.log(merge(Arrays,arrays2 ));

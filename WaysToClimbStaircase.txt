@@ -1,0 +1,25 @@
+// Write a program to count the ways to climb staircase. Max steps to climb stairs 1,2,3.
+//Recursive method
+function WaysToReachStairs(n) { 
+  if(n == 0 || n ==1) return 1
+  else if(n ==2) return 2
+  else return WaysToReachStairs(n-1) + WaysToReachStairs(n-2) + WaysToReachStairs(n-3)
+}
+console.log(WaysToReachStairs(4))
+console.log(WaysToReachStairs(8))
+console.log(WaysToReachStairs(5))
+
+//Dynamic programming
+function WaysToSteps(n) { 
+  let res = [];
+  res[0] = 1;
+  res[1] = 1;
+  res[2] = 2;
+  for(let i = 3; i <= n ; i++){
+    res[i] = res[i-1] + res[i-2] + res[i-3];
+  }
+  return res[n]
+}
+console.log(WaysToSteps(4))
+console.log(WaysToSteps(8))
+console.log(WaysToSteps(5))

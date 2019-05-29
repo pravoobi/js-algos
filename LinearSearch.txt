@@ -1,0 +1,10 @@
+function linearSearch(array, elementToFind) {
+  for (let i=0; i<array.length; i++) {
+    if (array[i] == elementToFind) {
+      return i;
+    }
+  } return null;
+}
+
+console.log(linearSearch(["red", "orange", "yellow", "green", "blue", "indigo", "violet"], "green")); // returns 3
+console.log(linearSearch(["red", "orange", "yellow", "green", "blue", "indigo", "violet"], "white")); // returns null

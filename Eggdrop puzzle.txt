@@ -1,0 +1,15 @@
+function eggdrop(n,k){
+  if (k == 0 && n > 0)
+    return 0;
+    
+  if (n == 1)
+    return k;
+    
+  let best = Number.MAX_SAFE_INTEGER;
+  
+  for (let x=1; x<=k; x++)
+    best = Math.min(best, Math.max(eggdrop(n-1, x-1), eggdrop(n, k-x)));
+  
+  return 1 + best;
+}
+console.log(eggdrop(2,10))

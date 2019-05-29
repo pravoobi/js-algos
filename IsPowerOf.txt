@@ -1,0 +1,27 @@
+function isPower(number, powerof){
+  if(number===1) return y===1
+  
+  let pow = 1;
+  while(pow < number){
+        pow = pow * powerof;
+  }
+  return pow === number;
+}
+
+
+console.log(isPower(1000, 10))
+console.log(isPower(1001, 10))
+console.log(isPower(500, 10))
+console.log(isPower(10, 10))
+
+// function isPower2(number, powerof){
+//   if(number===1) return y===1
+//   let result = Math.log10(number)/ Math.log10(powerof)
+ 
+//   console.log(result)
+//   return (result-Math.ceil(result)) == 0 ;
+// }
+// console.log(isPower2(1000, 10))
+// console.log(isPower2(1001, 10))
+// console.log(isPower2(500, 10))
+// console.log(isPower2(10, 10))

@@ -1,0 +1,15 @@
+function BubbleSort(arr){
+  let newArr = Array.from(arr);
+  let swap;
+  do{
+    swap = false;
+    for(let i=1; i < newArr.length ; i++){
+      if(newArr[i-1] > newArr[i]){
+        [newArr[i], newArr[i-1]] = [newArr[i-1], newArr[i]];
+        swap = true;
+      }
+    }
+  }while(swap);
+  return newArr;
+}
+console.log(BubbleSort([3, 12, 9, 5]))

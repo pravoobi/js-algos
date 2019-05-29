@@ -1,0 +1,23 @@
+function SmallestSubArraySum(Array, m){
+  let curr_sum = 0, min_len = Array.length+1;
+  
+  let start=0, end=0;
+  while(end < min_len - 1){
+    while(curr_sum <= m && end < min_len - 1){
+      curr_sum += Array[end++]
+    }
+    while(curr_sum > m && start < min_len - 1){
+      if(end-start < min_len){
+        min_len = end-start;
+      }
+      curr_sum -= Array[start++] 
+    }
+  }
+  let b = Array.splice(start, min_len)
+  return {min_len,b };
+  
+}
+console.log(SmallestSubArraySum([1, 4, 45, 6, 10, 19], 51))
+console.log(SmallestSubArraySum([1, 10, 5, 2, 7], 9))
+console.log(SmallestSubArraySum([1, 11, 100, 1, 0, 200, 3, 2, 1, 250], 280))
+console.log(SmallestSubArraySum([1, 2, 4], 8))

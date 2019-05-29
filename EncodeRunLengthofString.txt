@@ -1,0 +1,32 @@
+function encodeRunLength(data) { 
+let encode_data = []; 
+let c; 
+let len = 0; 
+
+for (let i = 0; i < data.length; i++) { 
+if ((0 < len) && (c == data.charAt(i))) { 
+  //console.log("len", len, c)
+len++; 
+continue; 
+} 
+
+if(len != 0) { 
+encode_data.push(c); 
+encode_data.push(len); 
+ // console.log("c",c,len)
+} 
+
+c = data.charAt(i); 
+len = 1; 
+} 
+
+if(len != 0) { 
+encode_data.push(c); 
+encode_data.push(len); 
+ // console.log("o",c,len)
+} 
+
+return encode_data.join(''); 
+}
+console.log(encodeRunLength('aaabbbccddeeeeeeeeeeeeee'))
+

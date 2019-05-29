@@ -1,0 +1,29 @@
+// Find the second smallest elements in an array arr=[12, 13, 1, 10, 34, 1]
+// function secondSmallest(arr){
+//   arr.sort((a,b) => a-b)
+//   for(let i = 1; i < arr.length ; i++){
+//     if(arr[i] > arr[0])
+//     return arr[i]
+//   }
+  
+// }
+// let arr=[12, 13, 1, 10, 34, 1]
+// console.log(secondSmallest(arr));
+
+function secondSmallest(arr){
+  let first=arr[0],second=arr[0];
+  arr.map(item => {
+    if(item <= first){
+      second = first;
+      first = item;
+    }
+    else if(item <= second){
+      second = item;
+    }
+  })
+  
+   
+  return[first, second]
+}
+let arr=[12, 13, 1, 10, 34, 1]
+console.log(secondSmallest(arr));

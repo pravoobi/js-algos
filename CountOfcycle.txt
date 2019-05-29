@@ -1,0 +1,32 @@
+// Given a function with 2 parameters - an integer array, and a startIndex
+// Every element of array is greater than or equal to zero
+// Starting from array[startIndex], follow each element to the index points to
+// Continue doing this until you find a cycle, return the cycle
+// return -1 if no cycle found.
+
+// Test Case :- countLengthOfCycle([1,0],0) //output should be 2
+// countLengthOfCycle([1,2,0],0) //output should be 3  
+
+function countlenghtOfCycle(array, sIndex){
+  let counter=0;
+  
+  
+  for(let i =sIndex; i < array.length ; i++){
+     counter++;
+    if(array[i] === sIndex){
+      return counter;
+    }
+    
+  }
+  for(let i =0; i < sIndex; i++){
+      counter++;
+    if(array[i] === sIndex){
+      return counter;
+    }
+    }
+  
+}
+console.log(countlenghtOfCycle([1,0],0))
+console.log(countlenghtOfCycle([1,2,0],1))
+console.log(countlenghtOfCycle([1,2,1,0 ],1))
+

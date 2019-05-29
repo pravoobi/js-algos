@@ -1,0 +1,16 @@
+function lastNonRepeatingChar(string){
+  let lastArray = []
+  for(let i=0; i < string.length; i++){
+    let c = string.charAt(i);
+    
+    if(string.indexOf(c) === i && string.indexOf(c, i+1) === -1) {
+      lastArray.push(c);
+    };
+    
+    
+  }
+  return lastArray.length > 0 ? lastArray[lastArray.length -1] : null;
+}
+
+console.log(lastNonRepeatingChar("abbanahjdhfuue"))
+console.log(lastNonRepeatingChar("maracuja"))

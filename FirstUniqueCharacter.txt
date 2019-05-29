@@ -1,0 +1,23 @@
+function firstNotRepeatedChar(str) {
+  let stringArray = str.split('');
+  let result = '';
+  let ctr = 0;
+ 
+  for (let x = 0; x < stringArray.length; x++) {
+    ctr = 0;
+ 
+    for (let y = 0; y < stringArray.length; y++) 
+    {
+      if (stringArray[x] === stringArray[y]) {
+        ctr+= 1;
+      }
+    }
+ 
+    if (ctr < 2) {
+      result = stringArray[x];
+      break;
+    }
+  }
+  return result;
+}
+console.log(firstNotRepeatedChar('abacddbec'));

@@ -1,0 +1,40 @@
+// You are working at the cash counter at a fun-fair, and you have different types of coins available to you in infinite quantities. The value of each coin is already given. Can you determine the number of ways of making change for a particular number of units using the given types of coins?
+// For example, if you have 4 types of coins, and the value of each type is given as 8, 3, 1, 2 respectively, you can make change for 3 units in three ways: [1,1,1], [1,2] , and [3].
+
+// Function Description:
+// Complete the getWays function given below. It must return an integer denoting the number of ways to make change.
+
+// getWays has the following parameter(s):
+// n: an integer, the amount to make change for
+// c: an array of integers representing available denominations
+
+// Sample Inputs
+// 4 3
+// 1 2 3
+
+// output: 4
+
+// sample input2
+// 10 4
+// 2 5 3 6
+
+// output: 5
+//https://www.geeksforgeeks.org/understanding-the-coin-change-problem-with-dynamic-programming/
+function getWays(amount, coins){
+  
+ let ways = [];
+  ways[0] = 1;
+  // console.log("c", ways, coins.length, amount)
+  for(let i =0; i<coins.length; i++){
+    for(let j =0; j < amount+1; j++){
+      ways[j] ? ways[j] : ways[j]=0;
+      if(coins[i] <= j){
+        ways[j] += ways[(j-coins[i])];
+        // console.log(ways, j, i, ways[j], coins[i])
+      } 
+    }
+  }
+  return ways[ways.length -1];
+}
+console.log(getWays(4, [1,2,3]))
+console.log(getWays(10, [2,5,3,6]))

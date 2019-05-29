@@ -1,0 +1,18 @@
+function MedianoftwoArrays(arr1, arr2){
+  let arr = [...new Set([...arr1, ...arr2])]
+  arr.sort((a,b)=>a-b)
+  if(arr.length%2 === 0){
+    let lowmid = Math.floor((arr.length-1)/2)
+    let highmid = Math.ceil((arr.length-1)/2)
+    let median = (arr[lowmid] + arr[highmid])/2;
+    console.log(arr[lowmid],arr[highmid] )
+    return median
+  }else{
+    let c = arr[Math.floor(arr.length/2)]
+    console.log("c", c, arr.length/2)
+    return c
+  }
+}
+
+console.log(MedianoftwoArrays([1, 2, 3, 4, 5],[2, 3, 4, 5, 6,7]))
+console.log(MedianoftwoArrays([0,8,6,7,934949, 2, 4543, 445, 5],[234534, 3345, 4556656, 5453453, 6,9090047]))

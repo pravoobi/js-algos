@@ -1,0 +1,64 @@
+function quickSort(arr, left, right){
+   let len = arr.length, 
+   pivot,
+   partitionIndex;
+
+
+  if(left < right){
+    pivot = right;
+    partitionIndex = partition(arr, pivot, left, right);
+    
+   //sort left and right
+   quickSort(arr, left, partitionIndex - 1);
+   quickSort(arr, partitionIndex + 1, right);
+  }
+  return arr;
+}
+function partition(arr, pivot, left, right){
+   let pivotValue = arr[pivot],
+       partitionIndex = left;
+
+   for(let i = left; i < right; i++){
+    if(arr[i] < pivotValue){
+      swap(arr, i, partitionIndex);
+      partitionIndex++;
+    }
+  }
+  swap(arr, right, partitionIndex);
+  return partitionIndex;
+}
+function swap(arr, i, j){
+   let temp = arr[i];
+   arr[i] = arr[j];
+   arr[j] = temp;
+}
+console.log(quickSort([11,8,14,3,6,2,7],0,6))
+//[2, 3, 6, 7, 8, 11, 14]
+console.log(quickSort([11,8,14,3,6,2,1, 7],0,7))
+//[1, 2, 3, 6, 7, 8, 11, 14]
+console.log(quickSort([16,11,9,7,6,5,3, 2],0,7))
+//[2, 3, 5, 6, 7, 9, 11, 16]
+
+
+
+//Alternative method
+
+const arr = [6, 1, 5, 3, 9, 6, 7, 10, 16, 4, 0, 12, 2]
+
+function qsort(arr){
+    if (arr.length < 2) return arr
+    // choose a pivot, p
+    // the choice of pivot can effect worst-case performance
+    // for this, we'll just use the first element.
+    const [p, ...rest] = arr
+   
+
+    // partition array into element greater and lesser that the pivot
+    // this can be optimized so you don't loop through the array twice
+    const low  = rest.filter(n => n <= p)
+    const high = rest.filter(n => n > p)
+ console.log(p, arr, low, high)
+    // recurse on both partitions and reassemble as recursion unwinds
+    return [...qsort(low), p, ...qsort(high)]
+}
+console.log(qsort(arr))

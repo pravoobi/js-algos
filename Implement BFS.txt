@@ -1,0 +1,144 @@
+class Queue 
+{ 
+    constructor() 
+    { 
+        this.items = []; 
+    } 
+                  
+   enqueue(element) 
+  {     
+      this.items.push(element); 
+  } 
+  dequeue() 
+  { 
+      if(this.isEmpty()) 
+          return "Underflow"; 
+      return this.items.shift(); 
+  } 
+  front() 
+  { 
+      if(this.isEmpty()) 
+          return "No elements in Queue"; 
+        return this.items[0]; 
+  }
+  isEmpty() 
+  { 
+      return this.items.length == 0; 
+  } 
+  printQueue() 
+  { 
+      let str = ""; 
+      for(let i = 0; i < this.items.length; i++) 
+          str += this.items[i] +" "; 
+      return str; 
+  } 
+  
+} 
+
+let queue = new Queue(); 
+  
+console.log(queue.dequeue()); 
+  
+console.log(queue.isEmpty()); 
+
+queue.enqueue(10); 
+queue.enqueue(20); 
+queue.enqueue(30); 
+queue.enqueue(40); 
+queue.enqueue(50); 
+queue.enqueue(60); 
+  
+console.log(queue.front()); 
+  
+console.log(queue.dequeue()); 
+  
+console.log(queue.front()); 
+  
+console.log(queue.dequeue()); 
+  
+console.log(queue.printQueue()); 
+class Graph { 
+ 
+    constructor(noOfVertices) 
+    { 
+        this.noOfVertices = noOfVertices; 
+        this.AdjList = new Map(); 
+    } 
+  
+   addVertex(v) 
+  { 
+      this.AdjList.set(v, []); 
+  } 
+  addEdge(v, w) 
+  { 
+
+      this.AdjList.get(v).push(w); 
+
+      this.AdjList.get(w).push(v); 
+  } 
+  printGraph() 
+  { 
+      let get_keys = this.AdjList.keys(); 
+
+      for (let i of get_keys)  
+    { 
+          let get_values = this.AdjList.get(i); 
+          let conc = ""; 
+
+          for (let j of get_values) 
+              conc += j + " "; 
+
+          console.log(i + " -> " + conc); 
+      } 
+    } 
+  bfs(startingNode) 
+  { 
+
+      let visited = []; 
+      for (let i = 0; i < this.noOfVertices; i++) 
+          visited[i] = false; 
+
+      let q = new Queue(); 
+
+      visited[startingNode] = true; 
+      q.enqueue(startingNode); 
+
+      while (!q.isEmpty()) { 
+          let getQueueElement = q.dequeue(); 
+
+          console.log(getQueueElement); 
+
+          let get_List = this.AdjList.get(getQueueElement); 
+
+          for (let i in get_List) { 
+              let neigh = get_List[i]; 
+
+              if (!visited[neigh]) { 
+                  visited[neigh] = true; 
+                  q.enqueue(neigh); 
+              } 
+          } 
+      } 
+  } 
+} 
+
+var g = new Graph(6); 
+var vertices = [ 'A', 'B', 'C', 'D', 'E', 'F' ]; 
+  
+for (let i = 0; i < vertices.length; i++) { 
+    g.addVertex(vertices[i]); 
+} 
+  
+g.addEdge('A', 'B'); 
+g.addEdge('A', 'D'); 
+g.addEdge('A', 'E'); 
+g.addEdge('B', 'C'); 
+g.addEdge('D', 'E'); 
+g.addEdge('E', 'F'); 
+g.addEdge('E', 'C'); 
+g.addEdge('C', 'F'); 
+  
+g.printGraph(); 
+
+
+g.bfs('A'); 

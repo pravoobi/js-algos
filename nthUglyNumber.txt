@@ -1,0 +1,36 @@
+// function isUglyNumber(num){
+//   let arr = [2,3,5]
+//   arr.map(item => {
+//     while(num && num%item ===0) num /= item
+//   })
+//   return num === 1;
+ 
+// }
+// console.log(isUglyNumber(14))
+// console.log(isUglyNumber(15))
+
+function nTHUglyNumber(n){
+ 
+  function isUglyNumber(num){
+    let arr = [2,3,5]
+    arr.map(item => {
+      while(num && num%item ===0) num /= item
+    })
+    return num === 1 ? 1 : 0;
+
+  }
+  
+  let i=1, count=1;
+  while(n > count){
+    i++;
+   if(isUglyNumber(i)===1){
+    count++;
+   } 
+  }
+  return i;
+}
+
+console.log(nTHUglyNumber(7))
+console.log(nTHUglyNumber(10))
+console.log(nTHUglyNumber(15))
+console.log(nTHUglyNumber(150))

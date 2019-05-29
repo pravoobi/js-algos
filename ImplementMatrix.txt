@@ -1,0 +1,8 @@
+function matrix(row, column) {
+  return Array.from({
+    length: row
+
+  }, () => new Array(column).fill(0));
+};
+
+console.log(matrix(3,2));

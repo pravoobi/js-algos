@@ -1,0 +1,44 @@
+/* Find the longest sub string and return its start index and length
+E.g,: input = "abbbccda"
+output = [1,3]
+Test cases were
+1) input = "", output = [-1,0]
+2) input = "100001011", output = [1,4]
+2) input = "aabbbbbCDaA", output = [2,5]
+*/
+
+function longestsub(str){
+  
+  let stringArray =Array.from(str);
+  let maxString = stringArray[0];
+  let stringObject = [];
+  
+  for(let i = 0; i < stringArray.length -1; i++ ){
+    
+    if(stringArray[i] === stringArray[i+1]){
+            maxString = maxString + stringArray[i+1];
+
+    }else{
+      let temp = {
+        maxString, 
+        startindex:  i - maxString.length +1,
+        length: maxString.length
+        
+      }
+      stringObject.push(temp);
+      maxString = stringArray[i+1]
+      
+    }
+  }
+  let arritems = stringObject.map( item => item.length)
+  let maxval = Math.max(...arritems);
+  let maxindex = arritems.indexOf(maxval);
+  
+  // console.log(stringObject, arritems)
+  return ([stringObject[maxindex].startindex,stringObject[maxindex].length ])
+  
+}
+          
+console.log(longestsub("abbbccda"))
+console.log(longestsub("100001011"))
+console.log(longestsub("aabbbbbCDaA"))

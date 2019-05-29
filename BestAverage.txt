@@ -1,0 +1,33 @@
+///Best average of given array input
+// ['john',50],['ben',80],['john',50] 
+// best average should be [ben, 80]
+// ['john',80],['ben',50],['john',50] 
+// best average should be [john, 65]
+
+function BestAvg(Array){
+  let AvgObject={};
+  Array.map(item => {
+    if(AvgObject[item[0]]){
+      AvgObject[item[0]].push(item[1]);
+    }else{
+    AvgObject[item[0]] = [item[1]];
+    }
+  })
+  let newAvgObj={};
+  Object.entries(AvgObject).forEach(([key, value]) => {
+    let sum = value.reduce((prev,curr) => curr+=prev);
+    let average = sum/value.length;
+    newAvgObj[key]=average;
+  })
+  let maxval = Math.max(...Object.values(newAvgObj));
+  let indexofMaxval = Object.values(newAvgObj).indexOf(maxval);
+  console.log("avg",newAvgObj, maxval)
+  let indexofMaxkey = Object.keys(newAvgObj)[indexofMaxval];
+  return [indexofMaxkey, maxval]
+  
+}
+
+// console.log(BestAvg([['john',80],['ben',50],['john',50]]))
+console.log(BestAvg([['john',50],['ben',50],['john',50] , ['john',70]]))
+
+

@@ -1,0 +1,59 @@
+
+// Given two sequences, find the length of longest subsequence present in both of them. Both the strings are of uppercase.
+// For each test case print the length of longest  common subsequence of the two strings .
+// ABCDGH
+// AEDFHR
+
+// output:
+// 3
+
+function findLongestString(str1, str2){
+  let arr1 = str1.split('');
+  let arr2 = str2.split('');
+  // let arr = []
+  let commonStrings={}
+  
+  arr1.map(item => {
+    arr2.map( it => {
+      if(it === item){
+        // arr.push(item);
+        if(commonStrings[it] == undefined) commonStrings[it] = true;
+        arr2.splice(0,arr2.indexOf(it));
+        // arr1.splice(0,arr1.indexOf(it));
+        // console.log(arr1, arr2,arr, arr1.splice(arr1.indexOf(it),arr1.length ))
+      }
+    }
+    )
+  })
+  
+  return Object.keys(commonStrings).length
+}
+
+console.log(findLongestString('ABC','AXYZA' ))
+console.log(findLongestString('ABCDGHZTYKOL','AEDFHRKOL' ))
+
+//Arrays approach
+
+function findLongestString(str1, str2){
+  let arr1 = str1.split('');
+  let arr2 = str2.split('');
+  let arr = []
+  // let commonStrings={}
+  
+  arr1.map(item => {
+    arr2.map( it => {
+      if(it === item){
+        !arr.includes(it) && arr.push(item);
+        arr2.splice(0,arr2.indexOf(it));
+        arr1.slice(arr1.indexOf(it));
+        console.log(arr1, arr2,arr)
+      }
+    }
+    )
+  })
+  
+  return arr.length
+}
+
+console.log(findLongestString('ABC','AXYZA' ))
+console.log(findLongestString('ABCDGHZTYKOL','AEDFHRKOL' ))
