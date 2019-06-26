@@ -1,0 +1,2327 @@
+
+// input as string
+//1. First repeated number
+function firstRChar(str) {
+  let splittedValue = str.split('');
+  for(let value of splittedValue) { 
+     if(str.split(value).length - 1 >= 2) {
+     return value;
+   }
+  }
+   return 'There is no repeating numbers';
+}
+
+console.log('First Repeated Number is: ' + firstRChar('12334'));
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+//2. Last repeated number when input as string
+function lastRepeatedNumber(str) {
+ let splittedValue = str.split('').reverse();   //splitting the given string and reversing the array.
+  for(let value of splittedValue) { 
+     if(str.split(value).length - 1 >= 2) {    //check if the first repeated value is greater than 1
+      return value; 
+    }
+  }
+   return 'There is no repeating numbers';
+}
+
+console.log('Last Repeated Number is: ' + lastRepeatedNumber('12334565'));
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+//3.  First Non Repeating Number
+function firstNonRepeating(str) {
+  let splittedValue = str.split('');
+  for(let value of splittedValue) {
+     if(str.split(value).length - 1 == 1) {   //for non repeating the length will be for sure 1. checking if based on that.
+     return value;
+   }
+  }
+   return 'There is no repeating numbers';
+}
+
+console.log('First Non-Repeated Number is: ' + firstNonRepeating('12312'));
+
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
+//4. Last Non Repeating Number
+
+function lastNonRepeatedNumber(str) {
+ let splittedValue = str.split('').reverse();   //splitting the given string and reversing the array.
+  let index = splittedValue.length;
+  for(let value of splittedValue) { 
+     if(str.split(value).length - 1 === 1) {    //check if the first repeated value is greater than 1
+     return value; 
+   }
+  }
+   return 'There is no repeating numbers';
+}
+
+console.log('Last Non-Repeated Number is: ' +lastNonRepeatedNumber('1233456'));
+
+
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+// 5. Most Repeated Number
+
+function repeatedNumbers(num) {
+
+  let repeatedNum= {};
+  for(let value of num) {
+    if(repeatedNum[value]){   //check if the object key already exists
+      repeatedNum[value]++;
+    }
+  else {
+       repeatedNum[value] = 1;  //if not assign the value as 1;
+    }
+  }
+  
+  let objValue =  Object.values(repeatedNum);
+  
+  let maxValue = objValue && objValue.reduce((a,b) => {
+    return Math.max(a,b);
+  })    //getting the maximum repeating values from the objects
+  
+  let mostRepeated = Object.keys(repeatedNum).filter((key)=> { return repeatedNum[key] === maxValue });  //filter from the object based on the maximum repeating values given
+  
+  return mostRepeated.length === 1 ? mostRepeated[0] : rNum(mostRepeated);  //rNum is the method to return if there are multiple repeating number given in an array.
+  
+}
+
+function rNum(value) {
+  let repeatedNumbers = '';
+  for(let [index, num] of value.entries()) {
+    repeatedNumbers += num  + (index === value.length -1 ? '' : ',');
+  }
+  return repeatedNumbers;
+}
+console.log('Most Repeated Number is: ' +repeatedNumbers('1111122232'));
+
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
+/* Problem Name is &&& Second Smallest &&& PLEASE DO NOT REMOVE THIS LINE. */
+
+/**
+ * Instructions to candidate.
+ * 1) Run this code in the REPL to observe its behaviour. The
+ *    execution entry point is main().
+ * 2) Consider adding some additional tests in doTestsPass().
+ * 3) Implement secondSmallest() correctly.
+ * 4) If time permits, some possible follow-ups.
+ */
+
+
+/**
+ * Returns the second smallest element in the array x.
+ * Returns 0 if the array has fewer than 2 elements.
+ */
+function secondSmallest(x)
+{
+    
+  if(x.length <= 1) { 
+    return 0;
+  }
+  
+  let sortedData = x.sort((a,b) => { return a-b });
+  return 1;
+}
+
+
+/**
+ * Returns true if all tests pass; otherwise, returns false.
+ */
+function doTestsPass()
+{
+  // todo: add more test cases
+  var testArrays  = [[0], [0,1,2, 1]];
+  var testResults = [0, 1];
+  
+  // Run through the tests and make assertions
+  for(var i = 0; i < testArrays.length; i++)
+  {
+  if(secondSmallest(testArrays[i]) != testResults[i])
+  {
+    return false;
+  }
+  }
+  return true;
+}
+
+
+/**
+ * Main execution entry.
+ */
+if(doTestsPass())
+{
+  console.log("samllest number : All tests pass!");
+}
+else
+{
+  console.log("There are test failures.");
+}
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//2-> approach for the smallest element in an array
+
+function secondSmallest(x)
+{
+   let first = 999;
+   let second = 999;   // getting two variable with max value
+ if(x.length <= 1) {
+   return 0;         //if array length is less than 1 return 0;
+ }
+  
+  for(let value of x) {     //looping the array value
+    if(value <= first) {     //itierating if the value of array is less than first value(first value as variable stored with maxvalue)
+      
+      second = first;     //if so assign the first to second and updating the current value to the first value
+      first = value;
+    }
+    else if(value <= second){  //if iterated value is less than second value(variable stored)
+        second = value;    //updating second value as current value
+      }
+  }
+  return second;
+}
+
+
+console.log('Another approach:- second smallest number is ' +secondSmallest([4,3,2,9,1]));
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+// //input as arrays
+// //First repeated number
+// function firstRepeatingNumber(num) {
+// let repeatedValue = {};  //dummy object
+
+// for(let value of num) {
+//     if(repeatedValue[value]){   //check if the object key already exists
+//       repeatedValue[value]++;
+//     }
+//   else {
+//        repeatedValue[value] = 1;  //if not assign the value as 1;
+//     }
+//   }
+  
+//   //next iteration
+//   for(let val of num) { 
+//      if(repeatedValue[val] >= 2) {   //if the repeated value is greater than 2 return the first repeated number.
+//         return val;
+//      }
+//   }
+//     return 'There is no repeating numbers';  //return the static text when there is no repeated values.
+// }
+
+// console.log(firstRepeatingNumber([1,2,3,4]));
+
+
+
+
+//3. best average Grade
+function bestAverageGrade(arr) {
+  let obj = {};
+  for(let [index, value] of arr.entries()) {
+    value.forEach((item, index) => {
+       if(index % 2 ===0) {
+         if(obj[item]){
+           obj['dummy_'+ item] = value[index + 1];
+         }
+         else {
+         obj[item] = value[index + 1];
+         }
+       }
+    })
+  }
+  let maxValue =  Object.values(obj).reduce((a,b) => {
+     return Math.max(a,b).toString();
+  });
+  
+  let bestAvgName = Object.keys(obj).filter((key)=> { return obj[key] === maxValue });
+  return maxValue + ' by ' + (bestAvgName[0].indexOf('dummy') >= 0 ? bestAvgName[0].split('dummy_')[1] : bestAvgName[0]);
+}
+
+console.log( 'Best average score is ' + bestAverageGrade([["jerry","10"],["bob","50"],["jerry","55"],["eric","23"]]));
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+//Find smallest subarray with sum greater than a given value
+
+const smallestSubArray = () => {
+ let arr = [1, 4,3];
+ let givenValue = 6; 
+  
+  
+  let minLength = arr.length + 1;
+  for(let [index, value] of arr.entries()) {
+     
+  let currentValue = arr[index];
+  
+    if(currentValue > givenValue) {
+      return 1;
+    }
+    
+    for(let end = index + 1; end<arr.length; end++) {
+      currentValue = currentValue + arr[end];
+      if(currentValue > givenValue && (end - index + 1) < minLength) {
+          minLength = (end-index + 1);
+      }
+    }
+  }
+  return minLength;
+}
+
+
+console.log(smallestSubArray())
+
+
+
+
+//largest sum using kadane's algorithm
+const subArray = () => {
+let arr = [-2, -3, 4, -1, -2, 1, 5, -3];
+  
+  let current=0; let max = 0;
+  for(let [index, value] of arr.entries()) {
+     max = max + value;
+     if(max < 0) {
+      max = 0;
+    }
+    if(current < max) {
+      current = max;
+    }
+  }
+  return current;
+}
+
+console.log(subArray());
+
+
+//kadane's algorithm 2 approach
+const subArray1 = () => {
+let arr = [-2, -3, 4, -1, -2, 1, 5, -3];
+  
+  let current =arr[0];let max = arr[0];
+  
+  for(let [index, value] of arr.entries()) {
+   current = Math.max(arr[index], current + arr[index])
+    if(current > max) {
+      max = current
+    }
+  }
+     return max;
+}
+
+
+console.log(subArray1());
+
+
+
+//stair Case with 3 climbs
+const stairCase = (val) => {
+
+  if(val <= 1) {
+     return 1;
+  }
+  if(val === 2) {
+    return 2;
+  }
+ return stairCase(val - 1) + stairCase(val - 2) + stairCase(val - 3);
+}
+
+console.log(stairCase(5))
+
+
+//stair case with 2 climbs
+const stairCasee = (val) => {
+ let res = [];
+  
+  res[0] = 1;
+  res[1]=  1
+  
+  for(let i = 2; i<= val; i++) {
+    res[i] = res[i-1] + res[i -2];
+   
+  }
+   return res[val]
+}
+
+
+console.log(stairCasee(5));
+
+
+
+//we can check the given string is palidrone if all the character length contains even and only one odd.
+const checkIsPalindrome = (str) => {
+  
+  let obj = {};
+  str.split('').forEach((item, index) => {
+     obj[item] ? obj[item]++ : obj[item] = 1;
+  });
+  let value = Object.values(obj).sort();
+  let count = 0;
+  value.forEach((item,index) => {
+     if(item % 2 !== 0){
+        count++;
+     }
+  })
+  if(count != 1) {
+     return  'The given string does not contain palidrome';
+   }
+  return 'The given string has palidrome';
+}
+
+
+console.log(checkIsPalindrome('bcdcb'))
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+let dummyArr = [];
+let countLengthOfCycle1 = (arr,ind) => {
+  if(ind > arr.length){
+    return 0;
+  }
+  if(!dummyArr.includes(arr[ind])){
+    dummyArr.push(arr[ind]);
+    countLengthOfCycle1(arr,arr[ind])
+  }else{
+    dummyArr.push(arr[ind])
+  }
+  
+  return dummyArr.lastIndexOf(arr[ind]) - dummyArr.indexOf(arr[ind])
+}
+
+console.log('Total count of the cycle is: '+ countLengthOfCycle1([1,2,0],2))
+
+
+// //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+// //subarray count if the product less than the given value
+const subArrayCount = (arr, k) => {
+  let product = 1;
+  let inx = '';
+    for(let [index,value] of arr.entries()) {
+     for(let j= index ; j<= arr.length; j++) {
+        if(product * arr[j] < k) {
+          product = product * arr[j];
+          inx += arr[j] + ',';
+      }
+      else {
+         product = 1;
+         break;
+      }
+    }
+  }
+  return inx.split(',').length - 1;
+}
+
+console.log('total subarry count is: ' + subArrayCount([5,3,2], 16));
+
+
+
+
+// //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+//sum of smallest subarray greater than given value
+
+const smallestSubArray = (arr, k) => {
+  
+  let temp = '';
+  let sum = 0;
+  let minlength = arr.length + 1;
+  for(let [index,value] of arr.entries()) {
+    sum = arr[index];
+    if(sum > k) { return 1; }
+    for(let j= index + 1; j< arr.length; j++) {
+        sum = sum + arr[j];
+      if(sum > k && (j-index + 1 < minlength)) {
+         minlength = j-index + 1;
+      }
+    }
+  }
+  return minlength;
+}
+
+console.log('smallest subarry count is: ' + smallestSubArray([1, 11, 100, 1, 0, 200, 3, 2, 1, 250], 280));
+
+
+
+// //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+//find if the value is power of 10.
+const power = (num) => {
+  let val = Math.log10(num) % 1 === 0;
+  return val;
+}
+
+console.log('contains power of 10? '+ power(1000));
+
+
+
+// //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+//First unique character in a string
+const uniqueCharacter = (str) => {
+  const splittedString = str.split('');
+    for(let index in splittedString) {
+         if(str.split(str.charAt(index)).length - 1 === 1) {
+         return str.charAt(index);
+      }
+    }
+  return 'no unique character'
+}
+
+console.log('The first unique character is: ' + uniqueCharacter('softvision'));
+
+
+
+// //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
+//quick sort using recursive function (quick sort is splitting into two subarray and sorting)
+   let sortedArray;
+ const quickSort = (arr) => {
+   if(arr.length <= 0) {
+     return arr;
+   }
+   else {
+      let duplicateArr = [];
+      let left = [];
+      let right = [];
+      let compareValue = arr.pop();
+    for(let [index,value] of arr.entries()) {
+      if(value < compareValue) {
+        left.push(value);
+      }
+      else if(value > compareValue) {
+        right.push(value);
+      }
+     }
+     sortedArray= duplicateArr.concat(quickSort(left),compareValue, quickSort(right));
+   }
+   return sortedArray;
+ }
+
+console.log('quick sort: ' + quickSort([-3,5,6,2,10,100, -4,0]));
+
+
+// //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+//bubble sort the array
+const bubbleSort = (arr) => {
+  for(let value of arr) {
+   for(let [index,item] of arr.entries()) {
+     if(item > arr[index + 1]) {
+       [arr[index], arr[index + 1]] = [arr[index + 1], arr[index]];
+      }
+    }
+  }
+  return arr;
+}
+
+console.log('bubble sort: '+ bubbleSort([100, -3, 20, 6, -2]))
+
+
+
+//binary search
+
+const binarySearch = (arr, key) => {
+  let low = 0;
+  let high = arr.length;
+  let mid;
+  while(low<=high) {
+    mid = Math.floor((low + high)/2);
+    if(key<arr[mid]) {
+     high = mid - 1;
+    }
+    if(key> arr[mid]) {
+     low = mid + 1;
+    }
+    if(key === arr[mid]) {
+      return true;
+    }
+  }
+  
+  return false;
+  
+}
+
+console.log('The given does exist? '+ binarySearch([40,3,2,1,9,56,5], 9))
+
+
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+//binary search tree with insert and search (put and contain)
+
+class BinarySearchTree {
+  constructor() {
+    this.root = null;
+    this.isSeachValueExist = false;
+  }
+  
+  
+  //insert the node
+  insertNode(data,left = null, right = null) {
+    let node = {
+      data,
+      left,
+      right
+    }
+    
+    let secondaryNode;
+    
+    if(this.root === null) {
+      this.root = node;
+    }
+    
+    else {
+      secondaryNode = this.root;
+      while(secondaryNode) {
+      if(data < secondaryNode.data) {
+         if(secondaryNode.left === null) {
+           secondaryNode.left = node;
+           break;
+         }
+        else {
+           secondaryNode = secondaryNode.left;
+        }
+      }
+      else if(data > secondaryNode.data) {
+              if(secondaryNode.right === null) {
+                secondaryNode.right = node;
+                break;
+              }
+        else {
+               secondaryNode = secondaryNode.right;  
+             }
+       }
+        else {
+          break;
+        }
+      }
+    }
+  }
+  
+  
+  //search the values in the tree
+  search(key) {
+    this.searchKey(this.root,key);
+  }
+  
+  searchKey(root, key) {
+    if(root === null) {
+      return null;
+    }
+    if(root.data === key) {
+       this.isSeachValueExist = true;
+    }
+    else if(key < root.data) {
+      this.searchKey(root.left, key);
+    }
+    else if (key > root.data) {
+      this.searchKey(root.right, key);
+    }
+  }
+  
+  
+  //order traversal (inorder, preorder, postorder)
+  inorder() {
+     this.inOrderTraversal(this.root);
+  }
+  
+  inOrderTraversal(root) {
+   if(root !== null) {
+      this.inOrderTraversal(root.left);
+      console.log('inorder:' + root.data);
+      this.inOrderTraversal(root.right);
+    }
+  }
+  
+  preorder() {
+     this.preOrderTraversal(this.root);
+  }
+  
+  preOrderTraversal(root) {
+   if(root !== null) {
+      console.log('preorder:' +root.data);
+      this.preOrderTraversal(root.left);
+      this.preOrderTraversal(root.right);
+    }
+  }
+  
+  postOrder() {
+     this.postOrderTraversal(this.root);
+  }
+  
+  postOrderTraversal(root) {
+   if(root !== null) {
+      this.postOrderTraversal(root.left);
+      this.postOrderTraversal(root.right);
+     
+      console.log('postorder:' +root.data);
+    }
+  }
+}
+
+console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+console.log('BinarySearchTree');
+let bst = new BinarySearchTree();
+
+bst.insertNode(10);
+bst.insertNode(5);
+bst.insertNode(7);
+bst.insertNode(3);
+bst.insertNode(6);
+bst.search(3);
+console.log('The search does exist? ' + bst.isSeachValueExist)
+// bst.inorder();
+// bst.preorder();
+// bst.postOrder();
+console.log(bst);
+
+console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// count length of cycle
+let uniqueArray = [];
+
+const countLength = (arr, startIndex) => {
+
+  if(startIndex >= 0 && !uniqueArray.includes(arr[startIndex])) {
+     uniqueArray.push(arr[startIndex]);
+     startIndex = arr[startIndex]       //update the next array value to startIndex
+     countLength(arr, startIndex);      //recursing the same method with array value and updated startIndex value
+  }
+  else if(arr[startIndex] === undefined) {
+    uniqueArray.push(arr[startIndex]);
+  }
+  if(uniqueArray.includes(undefined) || uniqueArray.length <= 1) {
+    return ': There is no cycle';
+  }
+  return uniqueArray.length;
+}
+
+console.log('1. The total count for cycle is ' + countLength([0,1], 0))
+
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+//3. best average Grade -> First Approach
+function bestAverageGradeFrist(arr) {
+  let obj = {};
+  for(let [index, value] of arr.entries()) {
+    value.forEach((item, index) => {
+       if(index % 2 ===0) {
+         if(obj[item]){
+           obj['dummy_'+ item] = value[index + 1];
+         }
+         else {
+         obj[item] = value[index + 1];
+         }
+       }
+    })
+  }
+  let maxValue =  Object.values(obj).reduce((a,b) => {
+     return Math.max(a,b).toString();
+  });
+  
+  let bestAvgName = Object.keys(obj).filter((key)=> { return obj[key] === maxValue });
+  return maxValue + ' by ' + (bestAvgName[0].indexOf('dummy') >= 0 ? bestAvgName[0].split('dummy_')[1] : bestAvgName[0]);
+}
+
+console.log( '2. a. Best average score is ' + bestAverageGradeFrist([["jerry","10"],["bob","50"],["jerry","55"],["eric","23"]]));
+
+
+//3. best average Grade using javascript Map instead of objects. This is the second approach 
+
+  let bestAvg = 0;
+  let name = '';  
+const bestAverageGrade = (arr) => {
+  let newMap =  new Map(arr);
+   for (let n of arr) {
+      if (newMap.get(n[0]) === n[1]) ''
+      else newMap.set(n[0]+'_dummy',n[1]);
+   }
+  newMap.forEach((item, value) => {
+    item = parseInt(item);
+    bestAvg = item >= bestAvg ? item : bestAvg;
+    name = item >= bestAvg ? value : name;
+   });
+  return bestAvg + ' by ' + name.split('_dummy')[0];
+}
+console.log( '2. b. Best average score is ' + bestAverageGrade([["bob","90"],["bob","98"],["jerry","95"],["eric","23"]]));
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+//Binary Search
+// binary search is like searching the number from the phone list based on the alphabetical order. 
+
+const binarySearch = (arr, searchValue) => {
+   let low = 0;
+   let high = arr.length;
+   arr = arr.sort((a,b) =>  { return a-b });   //sort the value from the given array
+  while(low <= high) {
+   let midValue = Math.floor((low+high)/2);   //get the mid value for each update
+   if(searchValue > arr[midValue]) {         //if the search value is greater consider second half of an array
+      low = midValue + 1;                      //so update the low value to mid + 1 .ie. from 0 to mid+1;
+   }
+  
+  else if (searchValue < arr[midValue]) {   //if the search value is less than the curent value consider first half                                             of an array
+      high = midValue - 1;
+    }
+  else if(searchValue == arr[midValue]) {   //if the value are found return true.
+      return true;
+  }
+}
+  return false;
+}
+
+console.log('3. The value given is exist : ' + binarySearch([10, 2 , 20, 30, 32,150], 20));
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+//Median of two arrays
+
+const findMedian = (arr) => {
+  
+  let mergedArray = arr.reduce((a,b) => {return [...a,...b]});  //merge two nested array into single array
+  let sortedArray = mergedArray.sort((a,b) => {return a-b });   //sorted the merged array.
+  
+  
+  //split the whole sorted array into two.
+  let firstHalfArray = sortedArray.slice(0, Math.floor(sortedArray.length/2));
+  let secondHalfArray = sortedArray.slice(Math.floor(sortedArray.length/2) , sortedArray.length);
+  
+  let median;
+  if(sortedArray.length % 2) {          // set the median value when the whole length is odd
+     let mid = Math.floor(sortedArray.length / 2);
+     median = sortedArray[mid];
+  }
+  else {        //when it is even then sum last value from first half and first value from second half /2;
+      median = (firstHalfArray[firstHalfArray.length - 1] + secondHalfArray[0]) / 2;
+  }
+
+  return median;
+}
+
+console.log('4. The Median value is : ' + findMedian([[1,22,13],[4,5,6]]));
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+// Run Length Encoding
+
+const findCharLength = (str) => {
+  str = str.toLowerCase();
+  let totalStringLength = '';
+  let duplicateValue = '';
+  
+  //splitting each character from the given string.
+    str.split('').map((item, index) => {
+      if(duplicateValue.includes(item)) {
+         return '';
+      }
+     else {
+      let length = str.split(item).length - 1;
+      totalStringLength += item + length;
+      duplicateValue += item;
+      }
+    })
+  return totalStringLength;
+}
+
+console.log('5. Each character length is: ' + findCharLength('SoftVision'));
+
+
+
+
+
+//Write a program to find the second most repeated character in a string.
+let str = 'abcabccacc';
+
+const getRepeatedChar = (str) => {
+  let obj = {};
+  str.split('').map((item, index) => {
+    
+    if(obj[item]) {
+      obj[item]++;
+    }
+    else{
+      obj[item] = 1;
+    }
+  });
+    let getMax =  Object.values(obj).sort((a,b) => {return a-b});
+  
+    let char = Object.keys(obj).filter((item,index) => {
+       if(parseInt(obj[item]) === getMax[1]) {
+          return item;
+       }
+    });
+  
+  return char;
+}
+
+
+console.log('The second most repeated char is: ' + getRepeatedChar(str));
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
+
+//binary search tree with insert and search (put and contain)
+
+class BinarySearchTree {
+  constructor() {
+    this.root = null;
+    this.isSeachValueExist = false;
+  }
+  
+  
+  //insert the node
+  insertNode(data,left = null, right = null) {
+    let node = {
+      data,
+      left,
+      right
+    }
+    
+    let secondaryNode;
+    
+    if(this.root === null) {
+      this.root = node;
+    }
+    
+    else {
+      secondaryNode = this.root;
+      while(secondaryNode) {
+      if(data < secondaryNode.data) {
+         if(secondaryNode.left === null) {
+           secondaryNode.left = node;
+           break;
+         }
+        else {
+           secondaryNode = secondaryNode.left;
+        }
+      }
+      else if(data > secondaryNode.data) {
+              if(secondaryNode.right === null) {
+                secondaryNode.right = node;
+                break;
+              }
+        else {
+               secondaryNode = secondaryNode.right;  
+             }
+       }
+        else {
+          break;
+        }
+      }
+    }
+  }
+  
+  
+  //search the values in the tree
+  search(key) {
+    this.searchKey(this.root,key);
+  }
+  
+  searchKey(root, key) {
+    if(root === null) {
+      return null;
+    }
+    if(root.data === key) {
+       this.isSeachValueExist = true;
+    }
+    else if(key < root.data) {
+      this.searchKey(root.left, key);
+    }
+    else if (key > root.data) {
+      this.searchKey(root.right, key);
+    }
+  }
+  
+  
+  //order traversal (inorder, preorder, postorder)
+  inorder() {
+     this.inOrderTraversal(this.root);
+  }
+  
+  inOrderTraversal(root) {
+   if(root !== null) {
+      this.inOrderTraversal(root.left);
+      console.log('inorder:' + root.data);
+      this.inOrderTraversal(root.right);
+    }
+  }
+  
+  preorder() {
+     this.preOrderTraversal(this.root);
+  }
+  
+  preOrderTraversal(root) {
+   if(root !== null) {
+      console.log('preorder:' +root.data);
+      this.preOrderTraversal(root.left);
+      this.preOrderTraversal(root.right);
+    }
+  }
+  
+  postOrder() {
+     this.postOrderTraversal(this.root);
+  }
+  
+  postOrderTraversal(root) {
+   if(root !== null) {
+      this.postOrderTraversal(root.left);
+      this.postOrderTraversal(root.right);
+     
+      console.log('postorder:' +root.data);
+    }
+  }
+  
+  isHeightBalanced() {
+     return this.checkHeightBalanced(this.root);
+  }
+  
+  checkHeightBalanced(root) {
+   
+    if(root === null){
+      return 0;
+    }
+    let leftSide = this.getHeight(root.left);
+    let rightSide = this.getHeight(root.right);
+    if(Math.abs(leftSide - rightSide) <= 1) {
+      return true;
+    }
+    return false;
+  }
+  
+  getHeight = (root) => {
+    if(root === null) {
+      return 0;
+    }
+    return 1 + Math.max(this.getHeight(root.left), this.getHeight(root.right));
+  }
+}
+
+console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+console.log('BinarySearchTree');
+let bst = new BinarySearchTree();
+
+bst.insertNode(10);
+bst.insertNode(5);
+bst.insertNode(17);
+bst.insertNode(7);
+
+bst.insertNode(6);
+console.log(bst);
+
+console.log(bst.isHeightBalanced())
+
+console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+
+
+
+
+// Fibonacci series
+
+const fibonacci = () => {
+  let start = 0;
+  let totalLength = 6;
+  let a = 0, b= 1, current;
+  let out = '';
+  for(let i=0; i< totalLength; i++) {
+    
+    current = a + b; 
+    a = b;
+    b = current;
+    out += b + ',';
+  }
+  return out;
+}
+
+console.log('The fibonacci series upto length 6 is: '+ fibonacci());
+
+
+//Factorial
+const factorial = (key) => {
+  if(key === 0) {
+     return 1;
+  }
+    return key * factorial(key - 1);
+} 
+
+console.log('The Factorial of 5 is: '+ factorial(5));
+
+
+//linear sort
+const linearSort = (arr) => {
+  let key; let j=0;
+  for(let i = 1; i < arr.length; i++) {
+    key = arr[i];
+      j = i - 1;
+      while(j>=0 && arr[j] > key) {
+        [arr[j+1], arr[j]] = [arr[j], arr[j+1]]
+        j = j-1;
+      }
+   }
+  return arr;
+}
+
+// console.log(linearSort([10,3,100,-5,1,6]));
+
+
+
+//Implementation of Stack
+
+class Stack {
+  constructor() {
+     this.item = [];
+  }
+  
+  push = (key) => {
+     this.item.push(key);
+  }
+  
+  pop = () => {
+     this.item.pop();
+  }
+  
+  peek = () => {
+      return this.item[this.item.length - 1];
+  }
+  
+  printStack = () => {
+     let str = ''
+    for(let [index,value] of this.item.entries()) {
+      str += value + (index === this.item.length - 1 ? '' : ',');
+    }
+    return str;
+  }
+  
+  isEmpty = () => {
+    return this.item.length === 0;
+  }
+}
+
+let stack = new Stack();
+
+stack.push(10);
+stack.push(20);
+stack.push(5);
+stack.pop();
+stack.peek();
+
+console.log(stack.printStack());
+
+
+//implementation of Queue
+
+class Queue {
+  constructor() {
+    this.item = [];
+  }
+  
+  insert = (key) => {
+    this.item.push(key);
+  }
+  
+  remove = (key) => {
+    this.item.shift();
+  }
+  
+  front = () => {
+    return this.item[0];
+  }
+  
+   printQueue = () => {
+     let str = ''
+    for(let [index,value] of this.item.entries()) {
+      str += value + (index === this.item.length - 1 ? '' : ',');
+    }
+    return str;
+  }
+}
+
+let queue = new Queue();
+queue.insert(10);
+queue.insert(20);
+queue.insert(30);
+queue.remove()
+console.log(queue.front());
+
+
+var input = [[1,  2,   3,  4],
+             [5,  6,   7,  8],
+             [9,  10, 11, 12],
+             [13, 14, 15, 16]];
+
+let result= []
+function run(input, result) {
+    if (input.length == 0) {
+        return result;
+    }
+
+    // add the first row to result
+    result = result.concat(input.shift());
+
+    // add the last element of each remaining row
+    input.forEach(function(rightEnd) {
+        result.push(rightEnd.pop());
+    });
+  
+  console.log(result);
+
+    // add the last row in reverse order
+    result = result.concat(input.pop().reverse());
+  
+
+    // add the first element in each remaining row (going upwards)
+    var tmp = [];
+    input.forEach(function(leftEnd) {    
+        tmp.push(leftEnd.shift());
+    });
+    result = result.concat(tmp.reverse());
+
+  
+    return run(input, result);
+}
+
+var out = run(input, []);
+
+console.log('result', out);
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
+//merge sort is like quick sort by diving into half.
+var unsortedArr = [2,3,1,6,4,7];
+
+function merge(leftArray, rightArray) {
+var sortedArr = [];
+  let i = 0; let j=0;
+  while (i< leftArray.length || j< rightArray.length) {
+    if(i === leftArray.length) {
+     sortedArr.push(rightArray[j]);
+     j++;
+   }
+    
+   else if(j === rightArray.length || leftArray[i] <= rightArray[j]) {
+      sortedArr.push(leftArray[i]);
+      i++;
+    }
+    else {
+      sortedArr.push(rightArray[j]);
+      j++;
+    }
+  }
+  return sortedArr;
+}
+
+
+function mergesort(arr) {
+  if (arr.length < 2) {
+    return arr; }
+  else {
+    var midpoint = parseInt(arr.length / 2);
+    var leftArr   = arr.slice(0, midpoint);
+    var rightArr  = arr.slice(midpoint, arr.length);
+    return merge(mergesort(leftArr), mergesort(rightArr));
+  }
+}
+console.log('Merge Sorting: '+ mergesort(unsortedArr));
+
+
+// quick sort is like merge sort , splitted into two half and recusive the function based on that
+const quickSort = (arr) => {
+
+  if(arr.length <=1) {
+    return arr;
+  }
+  else {
+    let duplicateArr = [];
+    let left = [];
+    let right = [];
+    let pop = arr.pop();
+    
+    for(let i = 0; i< arr.length ; i++) {
+       if(arr[i] < pop) {
+            left.push(arr[i]);
+          }
+      else if(arr[i] > pop) {
+         right.push(arr[i]);
+      }
+    }
+    
+    return duplicateArr.concat(quickSort(left), pop, quickSort(right));
+  }
+}
+
+console.log('Quick Sorting: '+quickSort([7,9,2,5,12,109,2382]));
+
+
+//bubble sort
+const bubbleSort = (arr) => {
+  for(let i = 0; i<arr.length ; i++) {
+    for(let j = 0 ; j< arr.length ; j++) {
+       if(arr[j] > arr[j+ 1]) {
+         [arr[j],arr[j+1]] = [arr[j+1], arr[j]];
+       }
+    }
+  }
+  return arr;
+}
+
+console.log('Bubble Sorting: '+bubbleSort([2,3,41,6,1]));
+
+
+
+//reverse the string
+
+const reverseString = (str) => {
+  return str.split('').reverse().join('');
+}
+
+console.log('reverse the string: '+ reverseString('softvision'));
+
+
+
+//Check if two arrays are equal or not  
+const checkArrays = (arr1, arr2) => {
+  let isSame = arr1.sort().every((item,index) => {
+     return item === arr2.sort((a,b)=> {return a-b})[index];
+  })
+ return isSame;
+}
+
+console.log('Is the given arrays are same? '+ checkArrays([2,1,5],[5,1,2]));
+
+
+//  Given an array arr of N integers. Find the contiguous sub-array with maximum sum. [1,2,3,-2,5] // 9
+
+const conSubArray = (arr) => {
+    
+  let current = 0, max = 0;
+  for(let [index, value] of arr.entries()) {
+    current = current + arr[index];
+    if(current < 0) {
+      current  = 0;
+    }
+    if(max < current) {
+       max = current;
+    }
+  }
+  return max;
+}
+
+console.log('contiguous SubArray is: '+ conSubArray([1,2,3,-2,5]));
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+const subArrayCount = (arr, k) => {
+  let product = 1;
+  let inx = '';
+    for(let [index,value] of arr.entries()) {
+     for(let j= index ; j<= arr.length; j++) {
+        if(product * arr[j] < k) {
+          product = product * arr[j];
+          inx += arr[j] + ',';
+      }
+      else {
+         product = 1;
+         break;
+      }
+    }
+  }
+  console.log(inx);
+  return inx.split(',').length - 1;
+}
+
+console.log('total subarry count is: ' + subArrayCount([1,2,3,4], 10));
+
+
+//linear sort
+
+let key;
+const LinearSort = (arr) => {
+
+  for(let index = 1; index < arr.length ; index++) {
+    key = arr[index];  
+    for(let j = index-1 ; (j>=0 && arr[j] > key);j--) {
+     [arr[j] , arr[j+1]] = [arr[j + 1] , arr[j]];
+    }
+  }
+  
+  return arr;
+}
+
+console.log(LinearSort([100,4,2,6,19,-2,-6]))
+
+
+//Implement Queue using Stacks
+
+class Queue {
+  constructor() {
+    this.item = [];
+    
+    this.stack1= []
+    this.stack2 =  [];
+  }
+  
+  pop = (item) => {
+    return item[item.length - 1];
+  }
+  
+  enQueue = (ele) => {
+      this.stack1.push(ele)
+  }
+  
+  deQueue = (ele) => {
+    while(this.stack1.length !== 0) {
+       let val = this.stack1.pop();  
+       this.stack2.push(val);
+    }
+    
+    let pop =  this.pop(this.stack2)
+    
+    while(this.stack2.length !== 0) {
+          let val = this.stack2.pop();  
+          this.stack1.push(val);
+      }
+  return pop;
+  }
+}
+
+let queue = new Queue();
+queue.enQueue(1);
+queue.enQueue(2);
+queue.enQueue(3);
+
+console.log(queue.deQueue());
+
+
+
+//single Linked list
+
+class LinkedList {
+
+  constructor() {
+     this.head = null;
+     this.length = 0;
+  }
+  
+  add = (value) => {
+      let newNode = { value };
+      newNode.next = this.head;
+      this.head = newNode;
+      this.length++;
+      return this;
+  }
+  
+  removeFromHead = () => {
+     if(this.head === null) {
+       return 0;
+     }
+    
+    let value = this.head.value;
+    this.head = this.head.next;
+    this.length--;
+    return this;
+  }
+  
+  find = (val) => {
+  let node = this.head
+    while(node) {
+      if(node.value === val) {
+        return 'the value exist';
+      }
+      
+      node = this.head.next;
+    }
+  }
+  
+  remove = (val) => {
+       
+    if(this.length === 0) {
+       return undefined;
+    }
+    
+     if(this.head.value === val) {
+        this.removeFromHead();
+     }
+     
+    let prevNode = this.head;
+    let node = prevNode.next;
+    
+    while(node) {
+     if(node.value === val) {
+        break;
+      }
+      prevNode = node;
+      node = node.next;
+    }
+     if(node ===null) {
+        return undefined;
+     }
+    
+    prevNode.next = node.next;
+    this.length--;
+    return this;
+  }
+}
+
+let linkedList = new LinkedList();
+linkedList.add(10)
+linkedList.add(20)
+linkedList.add(30);
+linkedList.add(40)
+console.log(linkedList.remove(30));
+console.log(linkedList.find(70));
+
+
+
+
+
+//double linked list
+class Node {
+  constructor(val) {
+    this.next = null;
+    this.value =  val;
+    this.previous = null;
+  }
+}
+
+class doubleLinkedList {
+
+   constructor() {
+      this.head = null;
+      this.length = 0;
+      this.tail = null
+   }
+  
+  add = (val) => {
+    var node = new Node(val);
+    if (this.length) {
+        this.tail.previous = node;
+        node.next = this.tail;
+        this.head = node;
+        this.tail = node;
+    } else {
+        this.head = node;
+        this.tail = node;
+    }
+    this.length++;
+    return node;
+   }
+  
+  find = (val) => {
+   let newNode = this.head;
+    while(newNode) {
+      
+    if(newNode.value ===  val) {
+       return 'The value exists';   
+      }
+    newNode = newNode.next; 
+    }
+    
+    return 'the value not exists'
+  }
+  
+  remove = (val) => {
+    if(this.length === 0) {
+      return undefined;
+    }
+    
+    let curr = this.head;
+    let nextNode = curr.next;
+     if(curr.value === val) {
+        this.head = nextNode;
+       if(this.head) {
+          this.head.previous = null;
+       }
+    }
+    
+    while(nextNode) {
+    if(curr.value === val) {
+      break;
+    }
+      
+      curr = nextNode;
+      nextNode = nextNode.next;
+    }
+    
+    if(nextNode === null) {
+      curr.next === null;
+    }
+    else {
+    nextNode.previous = curr.previous;
+    curr.previous.next = nextNode;
+    }
+    this.length--;
+    return this;
+  }
+}
+
+let dll = new doubleLinkedList();
+dll.add(10)
+dll.add(20)
+dll.add(30);
+dll.find(30)
+console.log(dll.remove(10));
+
+
+
+//sort stack using recursion
+
+let sortStack = (arr) => {
+   
+   if(arr.length > 0) {
+       let pop = arr.pop();
+        sortStack(arr);
+       return  insertSort(arr, pop);
+   }
+}
+
+let insertSort = (arr, temp) => {
+   
+   if(arr.length === 0 || temp > arr[arr.length - 1] ) {
+      arr.push(temp);
+   }
+  
+   else {
+        let pop = arr.pop();
+        insertSort(arr, temp);
+        arr.push(pop);
+    }
+  
+  return arr;
+}
+
+
+console.log(sortStack([9,3,4,1,-1,10]));
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+class LinkedList {
+
+  constructor() {
+     this.head = null;
+     this.length = 0;
+  }
+  
+  add = (value) => {   //add a new value
+      let newNode = { value };
+      newNode.next = this.head;
+      this.head = newNode;
+      this.length++;
+      return this;
+  }
+  
+  removeFromHead = () => {    //remove the value from head
+     if(this.head === null) {
+       return 0;
+     }
+    
+    let value = this.head.value;
+    this.head = this.head.next;
+    this.length--;
+    return this;
+  }
+  
+  find = (val) => {    //to search the value whether it exist in linked list or not
+  let node = this.head
+    while(node) {
+      if(node.value === val) {
+        return 'the value exist';
+      }
+      
+      node = this.head.next;
+    }
+  }
+  
+  remove = (val) => {    //remove the particular value inbetween the linkedlist
+       
+    if(this.length === 0) {
+       return undefined;
+    }
+    
+     if(this.head.value === val) {    //remove the value if the head value and value need to remove are same
+        this.removeFromHead();
+     }
+     
+    let prevNode = this.head;    //change the head and next value
+    let node = prevNode.next;
+    
+    while(node) {
+     if(node.value === val) {    
+        break;
+      }
+      prevNode = node;
+      node = node.next;
+    }
+     if(node ===null) {
+        return undefined;
+     }
+    
+    prevNode.next = node.next;      //remove from the linked list.
+    this.length--;
+    return this;
+  }
+  
+  
+  //find the intersection point in linked list
+  findIntersection = (l1,l2) => {
+    let l1length = this.getLength(l1);
+    let l2length = this.getLength(l2);    //get length for both list
+    let diff =  l1length - l2length;
+    let moveToDiffNode = this.mTDn(diff, l1);   //find the difference from list 1 and list 2
+    let intersectionPoint = this.getInterSectionPoint(moveToDiffNode, l2);  //get the intersection point when the                                                                               value meet same.
+    return intersectionPoint;
+  }
+  
+  getInterSectionPoint = (node1, node2) => {  
+    if(node1 === null || node2 === null) {
+       return 0;
+    }  
+    while(node1) {
+       if(node1.value === node2.value) {
+          return node1.value;    //return the list value when both node connects
+       }
+       node1 = node1.next;
+       node2 = node2.next; 
+    }
+    return 'no value found'
+  }
+  
+  
+  mTDn = (diff, node) => {
+     let count = 0;
+    if(node === null) {
+      return count;
+    }
+    while(node) {
+      if(diff === count) {         //move the head of the list based on difference value.
+         break;
+      }
+        node = node.next;
+        count++;
+    }
+    return node;
+  }
+  
+  getLength = (node) => {   //get length for both the list.
+    let count = 0;
+    if(node === null) {
+       return count;
+     }
+    while(node) {
+      node = node.next;
+      count++;
+    }
+    return count;
+  }
+}
+
+let linkedList = new LinkedList();
+linkedList.add(10)
+linkedList.add(20)
+linkedList.add(30);
+linkedList.add(40);
+linkedList.add(50);
+
+
+let ll = new LinkedList();
+ll.add(10)
+ll.add(20)
+ll.add(60);
+ll.add(70);
+console.log(linkedList.findIntersection(linkedList.head, ll.head));
+
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+function Node(info){
+      this.info = info
+      this.left = null;
+      this.right = null;
+      this.level = null; 
+}
+
+ Node.prototype.toString = function() {
+    return this.info;
+}  
+
+let BFS = (node) => {
+  node.level = 1;
+  let queue = [node];
+  let current_node; 
+  let output = [];
+ let current_level = node.level;
+ 
+   while(queue.length > 0) {
+      current_node = queue.shift(); 
+      if(current_node.level > current_level) {
+           current_level++;
+          output.push("\n");
+     }  
+  output.push(current_node + " ");
+  if(current_node.left) {
+       current_node.left.level = current_level + 1; 
+      queue.push(current_node.left); 
+   }  
+  if(current_node.right) {
+       current_node.right.level = current_level + 1; 
+      queue.push(current_node.right); 
+     }  
+    }
+  return output.join("") 
+}
+
+
+let root = new Node(9);
+root.left = new Node(8);    
+root.right = new Node(7);
+
+root.left.left = new Node(2);
+root.left.right = new Node(4);
+
+root.right.left = new Node(6);
+root.right.right = new Node(8);
+
+root.left.left.left = new Node('a');
+root.left.left.right = new Node('b');
+
+root.left.right.right = new Node('c');
+
+console.log(BFS(root)) 
+
+
+//>>>>>>>>>>>>>>>>>>>>>>
+
+const findHeight = (input) => {
+  let arr=[]
+  let current = 0;
+  let sum = 0;
+  for(let i = 1; i< input; i++) {
+    current = current + 1;
+    sum = sum + current;
+     if(sum > input){
+       return i;
+     }
+   }
+}
+
+console.log(findHeight(12))
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+let arr = ["cat", "dog", "tac", "god", "act"];
+
+
+let anagram = (arr) => {
+  let obj = {};
+  
+  arr.forEach((item,index) => {
+    let sortedVal = item.split('').sort().join('');
+     if(obj[sortedVal]) {
+        obj[sortedVal] += ',' + arr[index];
+     }
+    else {
+      obj[sortedVal] = arr[index];
+    }
+  })
+  
+ let val = Object.values(obj).join('');
+  
+ return val.replace(/,/g,' ');
+   
+}
+
+console.log(anagram(arr));
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+let maxHeight = ip => {
+  
+  let current = 0;
+  let sum = 0;
+  for(let i = 0; i< ip;i++) {
+    current = current + 1;
+    sum = sum + current;
+    if(sum > ip) {
+      return i;
+    }
+  }
+}
+
+
+console.log(maxHeight(2));
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+// Given n and an array of strings, print the string that contains the digits (1, 2, 3), if there are multiple strings that satisfies the conditions, print them in ascending order.
+
+// Input  : 5
+//          1395
+//          1721298
+//          102030
+//          3215
+//          123
+ 
+// Output : 123
+//          3215
+//          102030
+
+
+const findValue = arr => {
+    //filter the given array and returns the filtered value in array format
+  return arr.filter((item, index) => {
+      if(item.includes(1) && item.includes(2) && item.includes(3)) {
+         return item;
+      }
+  }).sort((a,b) => { return a-b  });  //sorting the filtered value.
+}
+
+console.log('sorted Value: ' + findValue(['5','1395','1721298','102030','3215','123']));
+
+
+
+// 2.There are n houses build in a line, each of which contains some value in it. A thief is going to steal the maximal value of these houses, but he can’t steal in two adjacent houses because owner of the stolen houses will tell his two neighbour left and right side. What is the maximum stolen value.
+// Input  : hval[] = {6, 7, 1, 3, 8, 2, 4}
+// Input  : hval[] = {6, 7, 1, 3, 8, 2, 4}
+// Output : 19
+// Thief will steal 6, 1, 8 and 4 from house.
+
+// Input  : hval[] = {5, 3, 4, 11, 2}
+// Output : 16
+// Thief will steal 5 and 11
+
+
+let val = [5, 3, 4, 11, 2];
+const maximumValue = (arr) => {
+  let [house, findMax] = [arr.length,[0, arr[0]]];
+  if(house.length === 1) {
+    return arr[0];
+  }
+  for(let i=2; i< house;i++) {
+    findMax[i] = Math.max(arr[i]+ findMax[i-2], findMax[i-1]);  //2 case.. steal, notSteal
+  }
+  return findMax[findMax.length - 1];
+}
+
+
+console.log('The maximum value stoles is: ' + maximumValue(val));
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+//let str = 'UDDLLRUUUDUURUDDUULLDRRRR';
+
+let str='UPPER 2xDOWN LEFT 2xLEFT';
+
+const findPosition = (str) => {
+   let obj = {U:0, L:0,R:0,D:0};
+  let newstr = '';
+  
+  if(str.indexOf('x') > 0) {
+    str.split(' ').forEach((item,index) => {
+      let val = 1;
+      if(item.includes('x')) {
+         let newArr=item.split('x');
+         item = newArr[1];
+         val = newArr[0];
+       }
+       newstr += item.charAt(0).repeat(val); 
+    })
+  }
+ str = newstr !== '' ? newstr : str;
+  str.split('').forEach((item,index) => {
+      obj[item]++;
+   })  
+  return (obj['R'] - obj['L']) + ','+ (obj['U'] - obj['D']) 
+}
+
+console.log(findPosition(str));
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+const getValue = (str) => {
+  if(str === '') {
+   return 0;
+  }  
+  
+  let [flag, prevStr, count, max, indexVal, key, newVal] = [true, str.charAt(0), 0, 0, 0, '', 0];
+  [...str].map((value,index) => {
+    if(prevStr !== value && !flag) {
+      indexVal = index;   //updating index value
+     }
+     if(prevStr === value) {
+        count++;
+       prevStr = value
+     }else {
+       count = 1;
+       prevStr = value
+      }
+
+    if(max < count) {
+       max = count;      //get max value for the char which is continuous
+       key = value;    //getting char which is max
+       newVal = indexVal
+      flag = false;
+    }
+  })
+  return 'The startIndex is ' + newVal  + ' the maxValue is ' + max + ' and the word is ' + key;
+}
+
+console.log(getValue('abcabbbbbbbbbbbbdddd'));
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//max-digit formation
+
+// var maxCombine = (a) => +(a.sort((x, y) => +("" + y + x) - +("" + x + y)).join(''));
+ 
+// // test & output
+// console.log([
+//   [1, 34, 3, 98, 9, 76, 45, 4],
+//   [54, 546, 548, 60]
+// ].map(maxCombine));
+
+
+
+
+function () {
+     'use strict';
+ 
+     // maxCombine :: [Int] -> Int
+     function maxCombine(xs) {
+         return parseInt(
+             xs.sort(
+                 function (x, y) {
+                     var a = x.toString(),
+                         b = y.toString(),
+                         ab = parseInt(a + b),
+                         ba = parseInt(b + a);
+ 
+                     return ab > ba ? -1 : (ab < ba ? 1 : 0);
+                 }
+             )
+             .join(''), 10
+         );
+     }
+ 
+     return [
+        [1, 34, 3, 98, 9, 76, 45, 4],
+        [54, 546, 548, 60]
+     ].map(maxCombine);
+ 
+ })();
+
+
+
+
+
+const number = (str) => {
+  let result = '';
+  let output = [];
+  
+  for(let i=0; i<=str.length;i++) {
+      output.push(i+1);
+    
+    if(i === str.length || str[i] === 'I') {
+    
+    while(output.length !== 0) {
+        result += (output.pop()).toString()
+      }
+    }
+  }
+  return result
+}
+
+console.log(number('IDIDI'))
+
+
+
+ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+// 3. Lily likes to play games with integers. She has created a new game where she determines the difference between a number and its reverse. For instance, given the number 12, its reverse is 21. Their difference is 9. The number 120 reversed is 21 , and their difference is 90.
+
+// She decides to apply her game to decision making. She will look at a numbered range of days and will only go to a movie on a beautiful day.
+
+// Given a range of numbered days,[i ... j]  and a number k, determine the number of days in the range that are beautiful. Beautiful numbers are defined as numbers where [i-reverse(i)] is evenly divisible by k. If a day's value is a beautiful number, it is a beautiful day. Print the number of beautiful days in the range.
+// Function Description:
+// beautifulDays has the following parameter(s):
+
+// i: the starting day number
+// j: the ending day number
+// k: the divisor
+
+// Example: 
+// Lily may go to the movies on days 20,21,22 and 23. We perform the following calculations to determine which days are beautiful:
+
+// Day 20 is beautiful because the following evaluates to a whole number: 20-02/6 = 18/6 = 3
+// Day 21 is not beautiful because the following doesn't evaluate to a whole number: 21-12/6 = 9/6 = 1.5
+// Day 22 is beautiful because the following evaluates to a whole number: 22-22/6 = 0/6 = 0
+// Day 23 is not beautiful because the following doesn't evaluate to a whole number: 23-32/6 = 9/6 = 1.5
+// Only two days, 20  and 22, in this interval are beautiful. Thus, we print 2 as our answer.
+
+// Input: 20 23 6
+// Ouput: 2
+
+
+
+
+const findBeautifulDays = (start, end, div) => {
+  let outputCount = 0;
+  let count = start;
+  while(count<=end) {
+    let reverseVal = parseInt(count.toString().split('').reverse().join(''));
+    let wholeDay = (count - reverseVal)/div;
+    if(wholeDay%1 === 0) {
+      outputCount++;
+    }
+     count++
+  }
+  return outputCount;
+}
+
+console.log(findBeautifulDays(20, 25, 6));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 1. Larry's Arrays
+// Larry has been given a permutation of a sequence of natural numbers incrementing from 1 as an array. He must determine whether the array can be sorted using the following operation any number of times:
+// Choose any  consecutive indices and rotate their elements in such a way that .
+// For example, if :
+// rotate 
+// [1,6,5,2,4,3]  [6,5,2]
+// [1,5,2,6,4,3]  [5,2,6]
+// [1,2,6,5,4,3]  [5,4,3]
+// [1,2,6,3,5,4]  [6,3,5]
+// [1,2,3,5,6,4]  [5,6,4]
+// [1,2,3,4,5,6]
+// On a new line for each test case, print YES if  can be fully sorted. Otherwise, print NO.
+
+// Example: 
+// 1: 3 1 2 -> rotate(3,1,2) -> [1,2,3]
+// 2: 1 3 4 2 -> rotate(3,4,2) -> [1,4,2,3]
+// 3: 1 4 2 3 -> rotate(4,2,3) -> [1,2,3,4]
+
+
+
+// array = [1,2,3,4] par=[2,3,4] => noSort => no
+// [1,2,4,3] = >parm[2,4,3] = nosort -> yes
+
+
+
+
+
+
+const findArray = (arr1, indices) => {
+  
+  let dummySorted = arr1.sort((a,b) => { return a-b});
+  
+ let ischeckInitialSorted =  arr1.every((item,index) => {
+     if(item === dummySorted[index]) {
+        return item;
+     }
+  })
+ if(ischeckInitialSorted) {
+   return 'NO';
+ }
+  
+  let mid = Math.floor(indices.length/2);
+  let firstIndices = indices.slice(0, mid);
+  let secondIndices = indices.slice(mid, indices.length); 
+  let rotatedIndices = [...secondIndices, ...firstIndices];
+
+  let index = arr1.indexOf(indices[0]);
+  let lastIndex = arr1.indexOf(indices[indices.length-1]);
+  let lastConcat = arr1.length - 1 === lastIndex ? [] : arr1.slice(lastIndex);
+  let concatRotatedIndices = [...arr1.slice(0,index), ...rotatedIndices, ...lastConcat];
+
+  let dummySortedArray = arr1.sort((a,b) => { return a-b});
+  
+ let isSorted =  concatRotatedIndices.every((item,index) => {
+     if(item === dummySortedArray[index]) {
+        return item;
+     }
+  })
+ 
+ if(isSorted) 
+    return 'YES';
+  else
+    return 'NO';
+} 
+
+
+
+console.log(findArray([1,3,4,2],[3,4,2]))
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+// Write a JavaScript function to convert a string in abbreviated form.
+// input: "Robin Singh"
+// output:// "Robin S."
+
+
+const convertAbb = (str) => {
+
+  const splittedStr = str.split(' ');
+  
+  let [ getInitial, result ] = [splittedStr[splittedStr.length-1].charAt(0), ''];
+  
+  let lastValue = splittedStr.length > 1 ? getInitial : '';
+  
+  let firstValue = splittedStr.length > 1 ? splittedStr.slice(0, splittedStr.length - 1): ''
+  
+  result += splittedStr.length === 1 ? getInitial : firstValue.join(' ') + ' ' + lastValue + '.';
+  
+  return result;
+}
+
+
+console.log(convertAbb('Robin Singh Munna'))
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+// //Write a function that moves all special char to the end of the String.
+// Input : !@$%^&*AJAY
+// Output :AJAY!@$%^&*
+
+
+const changeChar = (str) => {
+  let output = '';
+  let getChar = str.replace(/[A-Za-z]/g,(val) => {
+      output += val;
+  })
+  let val = str.split(output).join('');
+  return output += val;
+}
+
+console.log(changeChar('!@$%^&*AJAY$%$89'))
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+//student sitting in a circle manner question
+
+let arr=[];
+let storeValue;
+const findVal = (val, k) => {
+  storeValue = k;
+  for(let i=1;i<=val;i++) {
+    arr.push(i);
+  }
+ return newFindVal(arr,k);
+}
+
+
+
+
+const newFindVal = (arr,k) => {
+  if(arr.length === 1) {
+    return arr[0]
+  }
+  k = arr.length < storeValue ? storeValue%arr.length === 0 ? storeValue%arr.length + 1 : storeValue%arr.length - 1 : storeValue - 1;
+
+  let [first, second] = [arr.slice(0, k),arr.slice(k + 1, arr.length)];
+  return [...second, ...first].length > 1 ? newFindVal([...second, ...first], k) : [...second, ...first][0];
+}
+
+console.log(findVal(1000,5)); 
+
+
+
+
+

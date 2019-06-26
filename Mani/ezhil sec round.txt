@@ -1,0 +1,27 @@
+//let str = 'UDDLLRUUUDUURUDDUULLDRRRR';
+
+let str='UPPER 2xDOWN LEFT 2xLEFT';
+
+const findPosition = (str) => {
+   let obj = {U:0, L:0,R:0,D:0};
+  let newstr = '';
+  
+  if(str.indexOf('x') > 0) {
+    str.split(' ').forEach((item,index) => {
+      let val = 1;
+      if(item.includes('x')) {
+         let newArr=item.split('x');
+         item = newArr[1];
+         val = newArr[0];
+       }
+       newstr += item.charAt(0).repeat(val); 
+    })
+  }
+ str = newstr !== '' ? newstr : str;
+  str.split('').forEach((item,index) => {
+      obj[item]++;
+   })  
+  return (obj['R'] - obj['L']) + ','+ (obj['U'] - obj['D']) 
+}
+
+console.log(findPosition(str));

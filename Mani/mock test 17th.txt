@@ -1,0 +1,42 @@
+// Write a JavaScript function to convert a string in abbreviated form.
+// input: "Robin Singh"
+// output:// "Robin S."
+
+
+const convertAbb = (str) => {
+
+  const splittedStr = str.split(' ');
+  
+  let [ getInitial, result ] = [splittedStr[splittedStr.length-1].charAt(0), ''];
+  
+  let lastValue = splittedStr.length > 1 ? getInitial : '';
+  
+  let firstValue = splittedStr.length > 1 ? splittedStr.slice(0, splittedStr.length - 1): ''
+  
+  result += splittedStr.length === 1 ? getInitial : firstValue.join(' ') + ' ' + lastValue + '.';
+  
+  return result;
+}
+
+
+console.log(convertAbb('Robin Singh Munna'))
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+// //Write a function that moves all special char to the end of the String.
+// Input : !@$%^&*AJAY
+// Output :AJAY!@$%^&*
+
+
+const changeChar = (str) => {
+  let output = '';
+  let getChar = str.replace(/[A-Za-z]/g,(val) => {
+      output += val;
+  })
+  let val = str.split(output).join('');
+  return output += val;
+}
+
+console.log(changeChar('!@$%^&*AJAY$%$89'))

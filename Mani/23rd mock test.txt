@@ -1,0 +1,52 @@
+// Andy wants to play a game with his little brother, Bob. The game starts with an array of distinct integers and the rules are as follows:
+
+// Bob always plays first and the two players move in alternating turns.
+// In a single move, a player chooses the maximum element currently present in the array and removes it as well as all the other elements to its right. For example, if the starting array arr =[2,3,5,4,1], then it becomes arr=[2,3] after the first move because we remove the maximum element (i.e., 5) and all elements to its right (i.e., 4 and 1).
+// The modifications made to the array during each turn are permanent, so the next player continues the game with the remaining array. The first player who is unable to make a move loses the game.
+// Andy and Bob play 'g' games. Given the initial array for each game, find and print the name of the winner on a new line. If Andy wins, print ANDY; if Bob wins, print BOB.
+// To continue the example above, in the next move Andy will remove 3. Bob will then remove 2 and win because there are no more integers to remove.
+
+// Function Description
+
+// Complete the gamingArray function. It should return a string that represents the winner, either ANDY or BOB.
+
+// gamingArray has the following parameter(s):
+// arr: an array of integers 
+
+// Test cases:
+// Test case1: 5 2 6 3 4
+// Test case2: 3 1
+
+// Test Result:
+// ANDY
+// BOB
+
+// For Example:
+// Initial array:
+// [5 2 6 3 4]
+// In the first move, Bob removes 6 and all the elements to its right, resulting in Arr= [5,2]
+// In the second move, Andy removes 5 and all the elements to its right, resulting in Arr = []:
+// At this point, the array is empty and Bob cannot make any more moves. This means Andy wins, so we print ANDY on a new line. 
+
+  let val;
+  let count = 1;
+const findPlayer = (arr) => {
+  
+    let max = arr[0];
+  
+    arr.map((item,index) => {
+       if(max < item){
+          max = item;
+       }
+    })
+  
+   arr = arr.splice(0, arr.indexOf(max));
+  
+  if(arr.length) {
+    count++;
+    return findPlayer(arr);
+  }
+  return count%2 === 0 ? 'ANDY' : 'BOB';
+}
+
+console.log(findPlayer([3,1]));

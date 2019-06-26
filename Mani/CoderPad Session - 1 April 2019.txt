@@ -1,0 +1,128 @@
+//Find smallest subarray with sum greater than a given value
+
+const smallestSubArray = () => {
+ let arr = [1, 4,3];
+ let givenValue = 6; 
+  
+  
+  let minLength = arr.length + 1;
+  for(let [index, value] of arr.entries()) {
+     
+  let currentValue = arr[index];
+  
+    if(currentValue > givenValue) {
+      return 1;
+    }
+    
+    for(let end = index + 1; end<arr.length; end++) {
+      currentValue = currentValue + arr[end];
+      if(currentValue > givenValue && (end - index + 1) < minLength) {
+          minLength = (end-index + 1);
+      }
+    }
+  }
+  return minLength;
+}
+
+
+console.log(smallestSubArray())
+
+
+
+
+//largest sum using kadane's algorithm
+const subArray = () => {
+let arr = [-2, -3, 4, -1, -2, 1, 5, -3];
+  
+  let current=0; let max = 0;
+  for(let [index, value] of arr.entries()) {
+     max = max + value;
+     if(max < 0) {
+      max = 0;
+    }
+    if(current < max) {
+      current = max;
+    }
+  }
+  return current;
+}
+
+console.log(subArray());
+
+
+//kadane's algorithm 2 approach
+const subArray1 = () => {
+let arr = [-2, -3, 4, -1, -2, 1, 5, -3];
+  
+  let current =arr[0];let max = arr[0];
+  
+  for(let [index, value] of arr.entries()) {
+   current = Math.max(arr[index], current + arr[index])
+    if(current > max) {
+      max = current
+    }
+  }
+     return max;
+}
+
+
+console.log(subArray1());
+
+
+
+//stair Case with 3 climbs
+const stairCase = (val) => {
+
+  if(val <= 1) {
+     return 1;
+  }
+  if(val === 2) {
+    return 2;
+  }
+ return stairCase(val - 1) + stairCase(val - 2) + stairCase(val - 3);
+}
+
+console.log(stairCase(5))
+
+
+//stair case with 2 climbs
+const stairCasee = (val) => {
+ let res = [];
+  
+  res[0] = 1;
+  res[1]=  1
+  
+  for(let i = 2; i<= val; i++) {
+    res[i] = res[i-1] + res[i -2];
+   
+  }
+   return res[val]
+}
+
+
+console.log(stairCasee(5));
+
+
+
+//we can check the given string is palidrone if all the character length contains even and only one odd.
+const checkIsPalindrome = (str) => {
+  
+  let obj = {};
+  str.split('').forEach((item, index) => {
+     obj[item] ? obj[item]++ : obj[item] = 1;
+  });
+  let value = Object.values(obj).sort();
+  let count = 0;
+  value.forEach((item,index) => {
+     if(item % 2 !== 0){
+        count++;
+     }
+  })
+  if(count != 1) {
+     return  'The given string does not contain palidrome';
+   }
+  return 'The given string has palidrome';
+}
+
+
+console.log(checkIsPalindrome('bcdcb'))

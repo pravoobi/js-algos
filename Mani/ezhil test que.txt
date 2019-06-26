@@ -1,0 +1,29 @@
+const getValue = (str) => {
+  if(str === '') {
+   return 0;
+  }  
+  
+  let [flag, prevStr, count, max, indexVal, key, newVal] = [true, str.charAt(0), 0, 0, 0, '', 0];
+  [...str].map((value,index) => {
+    if(prevStr !== value && !flag) {
+      indexVal = index;   //updating index value
+     }
+     if(prevStr === value) {
+        count++;
+       prevStr = value
+     }else {
+       count = 1;
+       prevStr = value
+      }
+
+    if(max < count) {
+       max = count;      //get max value for the char which is continuous
+       key = value;    //getting char which is max
+       newVal = indexVal
+      flag = false;
+    }
+  })
+  return 'The startIndex is ' + newVal  + ' the maxValue is ' + max + ' and the word is ' + key;
+}
+
+console.log(getValue('abcabbbbbbbbbbbbdddd'));

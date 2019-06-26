@@ -1,0 +1,318 @@
+
+
+let dummyArr = [];
+let countLengthOfCycle1 = (arr,ind) => {
+  if(ind > arr.length){
+    return 0;
+  }
+  if(!dummyArr.includes(arr[ind])){
+    dummyArr.push(arr[ind]);
+    countLengthOfCycle1(arr,arr[ind])
+  }else{
+    dummyArr.push(arr[ind])
+  }
+  
+  return dummyArr.lastIndexOf(arr[ind]) - dummyArr.indexOf(arr[ind])
+}
+
+console.log('Total count of the cycle is: '+ countLengthOfCycle1([1,2,0],2))
+
+
+// //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+// //subarray count if the product less than the given value
+const subArrayCount = (arr, k) => {
+  let product = 1;
+  let inx = '';
+    for(let [index,value] of arr.entries()) {
+     for(let j= index ; j<= arr.length; j++) {
+        if(product * arr[j] < k) {
+          product = product * arr[j];
+          inx += arr[j] + ',';
+      }
+      else {
+         product = 1;
+         break;
+      }
+    }
+  }
+  return inx.split(',').length - 1;
+}
+
+console.log('total subarry count is: ' + subArrayCount([5,3,2], 16));
+
+
+
+
+// //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+//sum of smallest subarray greater than given value
+
+const smallestSubArray = (arr, k) => {
+  
+  let temp = '';
+  let sum = 0;
+  let minlength = arr.length + 1;
+  for(let [index,value] of arr.entries()) {
+    sum = arr[index];
+    if(sum > k) { return 1; }
+    for(let j= index + 1; j< arr.length; j++) {
+        sum = sum + arr[j];
+      if(sum > k && (j-index + 1 < minlength)) {
+         minlength = j-index + 1;
+      }
+    }
+  }
+  return minlength;
+}
+
+console.log('smallest subarry count is: ' + smallestSubArray([1, 11, 100, 1, 0, 200, 3, 2, 1, 250], 280));
+
+
+
+// //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+//find if the value is power of 10.
+const power = (num) => {
+  let val = Math.log10(num) % 1 === 0;
+  return val;
+}
+
+console.log('contains power of 10? '+ power(1000));
+
+
+
+// //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+//First unique character in a string
+const uniqueCharacter = (str) => {
+  const splittedString = str.split('');
+    for(let index in splittedString) {
+         if(str.split(str.charAt(index)).length - 1 === 1) {
+         return str.charAt(index);
+      }
+    }
+  return 'no unique character'
+}
+
+console.log('The first unique character is: ' + uniqueCharacter('softvision'));
+
+
+
+// //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
+//quick sort using recursive function (quick sort is splitting into two subarray and sorting)
+   let sortedArray;
+ const quickSort = (arr) => {
+   if(arr.length <= 0) {
+     return arr;
+   }
+   else {
+      let duplicateArr = [];
+      let left = [];
+      let right = [];
+      let compareValue = arr.pop();
+    for(let [index,value] of arr.entries()) {
+      if(value < compareValue) {
+        left.push(value);
+      }
+      else if(value > compareValue) {
+        right.push(value);
+      }
+     }
+     sortedArray= duplicateArr.concat(quickSort(left),compareValue, quickSort(right));
+   }
+   return sortedArray;
+ }
+
+console.log('quick sort: ' + quickSort([-3,5,6,2,10,100, -4,0]));
+
+
+// //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+//bubble sort the array
+const bubbleSort = (arr) => {
+  for(let value of arr) {
+   for(let [index,item] of arr.entries()) {
+     if(item > arr[index + 1]) {
+       [arr[index], arr[index + 1]] = [arr[index + 1], arr[index]];
+      }
+    }
+  }
+  return arr;
+}
+
+console.log('bubble sort: '+ bubbleSort([100, -3, 20, 6, -2]))
+
+
+
+//binary search
+
+const binarySearch = (arr, key) => {
+  let low = 0;
+  let high = arr.length;
+  let mid;
+  while(low<=high) {
+    mid = Math.floor((low + high)/2);
+    if(key<arr[mid]) {
+     high = mid - 1;
+    }
+    if(key> arr[mid]) {
+     low = mid + 1;
+    }
+    if(key === arr[mid]) {
+      return true;
+    }
+  }
+  
+  return false;
+  
+}
+
+console.log('The given does exist? '+ binarySearch([40,3,2,1,9,56,5], 9))
+
+
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+//binary search tree with insert and search (put and contain)
+
+class BinarySearchTree {
+  constructor() {
+    this.root = null;
+    this.isSeachValueExist = false;
+  }
+  
+  
+  //insert the node
+  insertNode(data,left = null, right = null) {
+    let node = {
+      data,
+      left,
+      right
+    }
+    
+    let secondaryNode;
+    
+    if(this.root === null) {
+      this.root = node;
+    }
+    
+    else {
+      secondaryNode = this.root;
+      while(secondaryNode) {
+      if(data < secondaryNode.data) {
+         if(secondaryNode.left === null) {
+           secondaryNode.left = node;
+           break;
+         }
+        else {
+           secondaryNode = secondaryNode.left;
+        }
+      }
+      else if(data > secondaryNode.data) {
+              if(secondaryNode.right === null) {
+                secondaryNode.right = node;
+                break;
+              }
+        else {
+               secondaryNode = secondaryNode.right;  
+             }
+       }
+        else {
+          break;
+        }
+      }
+    }
+  }
+  
+  
+  //search the values in the tree
+  search(key) {
+    this.searchKey(this.root,key);
+  }
+  
+  searchKey(root, key) {
+    if(root === null) {
+      return null;
+    }
+    if(root.data === key) {
+       this.isSeachValueExist = true;
+    }
+    else if(key < root.data) {
+      this.searchKey(root.left, key);
+    }
+    else if (key > root.data) {
+      this.searchKey(root.right, key);
+    }
+  }
+  
+  
+  //order traversal (inorder, preorder, postorder)
+  inorder() {
+     this.inOrderTraversal(this.root);
+  }
+  
+  inOrderTraversal(root) {
+   if(root !== null) {
+      this.inOrderTraversal(root.left);
+      console.log('inorder:' + root.data);
+      this.inOrderTraversal(root.right);
+    }
+  }
+  
+  preorder() {
+     this.preOrderTraversal(this.root);
+  }
+  
+  preOrderTraversal(root) {
+   if(root !== null) {
+      console.log('preorder:' +root.data);
+      this.preOrderTraversal(root.left);
+      this.preOrderTraversal(root.right);
+    }
+  }
+  
+  postOrder() {
+     this.postOrderTraversal(this.root);
+  }
+  
+  postOrderTraversal(root) {
+   if(root !== null) {
+      this.postOrderTraversal(root.left);
+      this.postOrderTraversal(root.right);
+     
+      console.log('postorder:' +root.data);
+    }
+  }
+}
+
+console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+console.log('BinarySearchTree');
+let bst = new BinarySearchTree();
+
+bst.insertNode(10);
+bst.insertNode(5);
+bst.insertNode(7);
+bst.insertNode(3);
+bst.insertNode(6);
+bst.search(3);
+console.log('The search does exist? ' + bst.isSeachValueExist)
+// bst.inorder();
+// bst.preorder();
+// bst.postOrder();
+console.log(bst);
+
+console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');

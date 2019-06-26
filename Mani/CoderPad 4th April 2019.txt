@@ -1,0 +1,123 @@
+
+
+//merge sort is like quick sort by diving into half.
+var unsortedArr = [2,3,1,6,4,7];
+
+function merge(leftArray, rightArray) {
+var sortedArr = [];
+  let i = 0; let j=0;
+  while (i< leftArray.length || j< rightArray.length) {
+    if(i === leftArray.length) {
+     sortedArr.push(rightArray[j]);
+     j++;
+   }
+    
+   else if(j === rightArray.length || leftArray[i] <= rightArray[j]) {
+      sortedArr.push(leftArray[i]);
+      i++;
+    }
+    else {
+      sortedArr.push(rightArray[j]);
+      j++;
+    }
+  }
+  return sortedArr;
+}
+
+
+function mergesort(arr) {
+  if (arr.length < 2) {
+    return arr; }
+  else {
+    var midpoint = parseInt(arr.length / 2);
+    var leftArr   = arr.slice(0, midpoint);
+    var rightArr  = arr.slice(midpoint, arr.length);
+    return merge(mergesort(leftArr), mergesort(rightArr));
+  }
+}
+console.log('Merge Sorting: '+ mergesort(unsortedArr));
+
+
+// quick sort is like merge sort , splitted into two half and recusive the function based on that
+const quickSort = (arr) => {
+
+  if(arr.length <=1) {
+    return arr;
+  }
+  else {
+    let duplicateArr = [];
+    let left = [];
+    let right = [];
+    let pop = arr.pop();
+    
+    for(let i = 0; i< arr.length ; i++) {
+       if(arr[i] < pop) {
+            left.push(arr[i]);
+          }
+      else if(arr[i] > pop) {
+         right.push(arr[i]);
+      }
+    }
+    
+    return duplicateArr.concat(quickSort(left), pop, quickSort(right));
+  }
+}
+
+console.log('Quick Sorting: '+quickSort([7,9,2,5,12,109,2382]));
+
+
+//bubble sort
+const bubbleSort = (arr) => {
+  for(let i = 0; i<arr.length ; i++) {
+    for(let j = 0 ; j< arr.length ; j++) {
+       if(arr[j] > arr[j+ 1]) {
+         [arr[j],arr[j+1]] = [arr[j+1], arr[j]];
+       }
+    }
+  }
+  return arr;
+}
+
+console.log('Bubble Sorting: '+bubbleSort([2,3,41,6,1]));
+
+
+
+//reverse the string
+
+const reverseString = (str) => {
+  return str.split('').reverse().join('');
+}
+
+console.log('reverse the string: '+ reverseString('softvision'));
+
+
+
+//Check if two arrays are equal or not  
+const checkArrays = (arr1, arr2) => {
+  let isSame = arr1.sort().every((item,index) => {
+     return item === arr2.sort((a,b)=> {return a-b})[index];
+  })
+ return isSame;
+}
+
+console.log('Is the given arrays are same? '+ checkArrays([2,1,5],[5,1,2]));
+
+
+//  Given an array arr of N integers. Find the contiguous sub-array with maximum sum. [1,2,3,-2,5] // 9
+
+const conSubArray = (arr) => {
+    
+  let current = 0, max = 0;
+  for(let [index, value] of arr.entries()) {
+    current = current + arr[index];
+    if(current < 0) {
+      current  = 0;
+    }
+    if(max < current) {
+       max = current;
+    }
+  }
+  return max;
+}
+
+console.log('contiguous SubArray is: '+ conSubArray([1,2,3,-2,5]));

@@ -1,0 +1,213 @@
+
+class LinkedList {
+
+  constructor() {
+     this.head = null;
+     this.length = 0;
+  }
+  
+  add = (value) => {   //add a new value
+      let newNode = { value };
+      newNode.next = this.head;
+      this.head = newNode;
+      this.length++;
+      return this;
+  }
+  
+  removeFromHead = () => {    //remove the value from head
+     if(this.head === null) {
+       return 0;
+     }
+    
+    let value = this.head.value;
+    this.head = this.head.next;
+    this.length--;
+    return this;
+  }
+  
+  find = (val) => {    //to search the value whether it exist in linked list or not
+  let node = this.head
+    while(node) {
+      if(node.value === val) {
+        return 'the value exist';
+      }
+      
+      node = this.head.next;
+    }
+  }
+  
+  remove = (val) => {    //remove the particular value inbetween the linkedlist
+       
+    if(this.length === 0) {
+       return undefined;
+    }
+    
+     if(this.head.value === val) {    //remove the value if the head value and value need to remove are same
+        this.removeFromHead();
+     }
+     
+    let prevNode = this.head;    //change the head and next value
+    let node = prevNode.next;
+    
+    while(node) {
+     if(node.value === val) {    
+        break;
+      }
+      prevNode = node;
+      node = node.next;
+    }
+     if(node ===null) {
+        return undefined;
+     }
+    
+    prevNode.next = node.next;      //remove from the linked list.
+    this.length--;
+    return this;
+  }
+  
+  
+  //find the intersection point in linked list
+  findIntersection = (l1,l2) => {
+    let l1length = this.getLength(l1);
+    let l2length = this.getLength(l2);    //get length for both list
+    let diff =  l1length - l2length;
+    let moveToDiffNode = this.mTDn(diff, l1);   //find the difference from list 1 and list 2
+    let intersectionPoint = this.getInterSectionPoint(moveToDiffNode, l2);  //get the intersection point when the                                                                               value meet same.
+    return intersectionPoint;
+  }
+  
+  getInterSectionPoint = (node1, node2) => {  
+    if(node1 === null || node2 === null) {
+       return 0;
+    }  
+    while(node1) {
+       if(node1.value === node2.value) {
+          return node1.value;    //return the list value when both node connects
+       }
+       node1 = node1.next;
+       node2 = node2.next; 
+    }
+    return 'no value found'
+  }
+  
+  
+  mTDn = (diff, node) => {
+     let count = 0;
+    if(node === null) {
+      return count;
+    }
+    while(node) {
+      if(diff === count) {         //move the head of the list based on difference value.
+         break;
+      }
+        node = node.next;
+        count++;
+    }
+    return node;
+  }
+  
+  getLength = (node) => {   //get length for both the list.
+    let count = 0;
+    if(node === null) {
+       return count;
+     }
+    while(node) {
+      node = node.next;
+      count++;
+    }
+    return count;
+  }
+}
+
+let linkedList = new LinkedList();
+linkedList.add(10)
+linkedList.add(20)
+linkedList.add(30);
+linkedList.add(40);
+linkedList.add(50);
+
+
+let ll = new LinkedList();
+ll.add(10)
+ll.add(20)
+ll.add(60);
+ll.add(70);
+console.log(linkedList.findIntersection(linkedList.head, ll.head));
+
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+function Node(info){
+      this.info = info
+      this.left = null;
+      this.right = null;
+      this.level = null; 
+}
+
+ Node.prototype.toString = function() {
+    return this.info;
+}  
+
+let BFS = (node) => {
+  node.level = 1;
+  let queue = [node];
+  let current_node; 
+  let output = [];
+ let current_level = node.level;
+ 
+   while(queue.length > 0) {
+      current_node = queue.shift(); 
+      if(current_node.level > current_level) {
+           current_level++;
+          output.push("\n");
+     }  
+  output.push(current_node + " ");
+  if(current_node.left) {
+       current_node.left.level = current_level + 1; 
+      queue.push(current_node.left); 
+   }  
+  if(current_node.right) {
+       current_node.right.level = current_level + 1; 
+      queue.push(current_node.right); 
+     }  
+    }
+  return output.join("") 
+}
+
+
+let root = new Node(9);
+root.left = new Node(8);    
+root.right = new Node(7);
+
+root.left.left = new Node(2);
+root.left.right = new Node(4);
+
+root.right.left = new Node(6);
+root.right.right = new Node(8);
+
+root.left.left.left = new Node('a');
+root.left.left.right = new Node('b');
+
+root.left.right.right = new Node('c');
+
+console.log(BFS(root)) 
+
+
+//>>>>>>>>>>>>>>>>>>>>>>
+
+const findHeight = (input) => {
+  let arr=[]
+  let current = 0;
+  let sum = 0;
+  for(let i = 1; i< input; i++) {
+    current = current + 1;
+    sum = sum + current;
+     if(sum > input){
+       return i;
+     }
+   }
+}
+
+console.log(findHeight(12))

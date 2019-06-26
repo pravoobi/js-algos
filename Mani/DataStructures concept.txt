@@ -1,0 +1,31 @@
+Stack and queue:
+1) https://www.programwitherik.com/how-to-create-a-linked-list-and-stack-in-javascript-2/
+2) https://medium.com/dev-blogs/ds-with-js-stack-queue-d91fc8cea7a3
+3) https://medium.com/omarelgabrys-blog/stacks-and-queues-d96c6f35fae3
+
+
+Linked List: 
+LL & Single Linked list: https://codeburst.io/linked-lists-in-javascript-es6-code-part-1-6dd349c3dcc3
+Whole concepts in Linked List with easy understanding: https://codeburst.io/js-data-structures-linked-list-3ed4d63e6571
+
+
+Binary search tree:
+https://medium.com/javascript-in-plain-english/binary-search-tree-in-javascript-ca5aa7ba05de
+https://medium.freecodecamp.org/data-structures-101-binary-search-tree-398267b6bff0
+
+
+BFS & DFS:
+BFS: https://medium.freecodecamp.org/breadth-first-search-in-javascript-e655cd824fa4
+DFS: https://medium.com/employbl/depth-first-and-breadth-first-search-on-trees-in-javascript-58dcd6ff8de1
+
+Bubble Sort understanding: 
+https://www.tutorialspoint.com/data_structures_algorithms/bubble_sort_algorithm.htm
+
+Merge sort understanding: 
+https://www.tutorialspoint.com/data_structures_algorithms/merge_sort_algorithm.htm
+
+Quick sort: 
+https://www.tutorialspoint.com/data_structures_algorithms/quick_sort_algorithm.htm
+
+Binary search: 
+https://www.tutorialspoint.com/data_structures_algorithms/binary_search_algorithm.htm

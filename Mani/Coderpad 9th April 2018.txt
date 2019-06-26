@@ -1,0 +1,281 @@
+const subArrayCount = (arr, k) => {
+  let product = 1;
+  let inx = '';
+    for(let [index,value] of arr.entries()) {
+     for(let j= index ; j<= arr.length; j++) {
+        if(product * arr[j] < k) {
+          product = product * arr[j];
+          inx += arr[j] + ',';
+      }
+      else {
+         product = 1;
+         break;
+      }
+    }
+  }
+  console.log(inx);
+  return inx.split(',').length - 1;
+}
+
+console.log('total subarry count is: ' + subArrayCount([1,2,3,4], 10));
+
+
+//linear sort
+
+let key;
+const LinearSort = (arr) => {
+
+  for(let index = 1; index < arr.length ; index++) {
+    key = arr[index];  
+    for(let j = index-1 ; (j>=0 && arr[j] > key);j--) {
+     [arr[j] , arr[j+1]] = [arr[j + 1] , arr[j]];
+    }
+  }
+  
+  return arr;
+}
+
+console.log(LinearSort([100,4,2,6,19,-2,-6]))
+
+
+//Implement Queue using Stacks
+
+class Queue {
+  constructor() {
+    this.item = [];
+    
+    this.stack1= []
+    this.stack2 =  [];
+  }
+  
+  pop = (item) => {
+    return item[item.length - 1];
+  }
+  
+  enQueue = (ele) => {
+      this.stack1.push(ele)
+  }
+  
+  deQueue = (ele) => {
+    while(this.stack1.length !== 0) {
+       let val = this.stack1.pop();  
+       this.stack2.push(val);
+    }
+    
+    let pop =  this.pop(this.stack2)
+    
+    while(this.stack2.length !== 0) {
+          let val = this.stack2.pop();  
+          this.stack1.push(val);
+      }
+  return pop;
+  }
+}
+
+let queue = new Queue();
+queue.enQueue(1);
+queue.enQueue(2);
+queue.enQueue(3);
+
+console.log(queue.deQueue());
+
+
+
+//single Linked list
+
+class LinkedList {
+
+  constructor() {
+     this.head = null;
+     this.length = 0;
+  }
+  
+  add = (value) => {
+      let newNode = { value };
+      newNode.next = this.head;
+      this.head = newNode;
+      this.length++;
+      return this;
+  }
+  
+  removeFromHead = () => {
+     if(this.head === null) {
+       return 0;
+     }
+    
+    let value = this.head.value;
+    this.head = this.head.next;
+    this.length--;
+    return this;
+  }
+  
+  find = (val) => {
+  let node = this.head
+    while(node) {
+      if(node.value === val) {
+        return 'the value exist';
+      }
+      
+      node = this.head.next;
+    }
+  }
+  
+  remove = (val) => {
+       
+    if(this.length === 0) {
+       return undefined;
+    }
+    
+     if(this.head.value === val) {
+        this.removeFromHead();
+     }
+     
+    let prevNode = this.head;
+    let node = prevNode.next;
+    
+    while(node) {
+     if(node.value === val) {
+        break;
+      }
+      prevNode = node;
+      node = node.next;
+    }
+     if(node ===null) {
+        return undefined;
+     }
+    
+    prevNode.next = node.next;
+    this.length--;
+    return this;
+  }
+}
+
+let linkedList = new LinkedList();
+linkedList.add(10)
+linkedList.add(20)
+linkedList.add(30);
+linkedList.add(40)
+console.log(linkedList.remove(30));
+console.log(linkedList.find(70));
+
+
+
+
+
+//double linked list
+class Node {
+  constructor(val) {
+    this.next = null;
+    this.value =  val;
+    this.previous = null;
+  }
+}
+
+class doubleLinkedList {
+
+   constructor() {
+      this.head = null;
+      this.length = 0;
+      this.tail = null
+   }
+  
+  add = (val) => {
+    var node = new Node(val);
+    if (this.length) {
+        this.tail.previous = node;
+        node.next = this.tail;
+        this.head = node;
+        this.tail = node;
+    } else {
+        this.head = node;
+        this.tail = node;
+    }
+    this.length++;
+    return node;
+   }
+  
+  find = (val) => {
+   let newNode = this.head;
+    while(newNode) {
+      
+    if(newNode.value ===  val) {
+       return 'The value exists';   
+      }
+    newNode = newNode.next; 
+    }
+    
+    return 'the value not exists'
+  }
+  
+  remove = (val) => {
+    if(this.length === 0) {
+      return undefined;
+    }
+    
+    let curr = this.head;
+    let nextNode = curr.next;
+     if(curr.value === val) {
+        this.head = nextNode;
+       if(this.head) {
+          this.head.previous = null;
+       }
+    }
+    
+    while(nextNode) {
+    if(curr.value === val) {
+      break;
+    }
+      
+      curr = nextNode;
+      nextNode = nextNode.next;
+    }
+    
+    if(nextNode === null) {
+      curr.next === null;
+    }
+    else {
+    nextNode.previous = curr.previous;
+    curr.previous.next = nextNode;
+    }
+    this.length--;
+    return this;
+  }
+}
+
+let dll = new doubleLinkedList();
+dll.add(10)
+dll.add(20)
+dll.add(30);
+dll.find(30)
+console.log(dll.remove(10));
+
+
+
+//sort stack using recursion
+
+let sortStack = (arr) => {
+   
+   if(arr.length > 0) {
+       let pop = arr.pop();
+        sortStack(arr);
+       return  insertSort(arr, pop);
+   }
+}
+
+let insertSort = (arr, temp) => {
+   
+   if(arr.length === 0 || temp > arr[arr.length - 1] ) {
+      arr.push(temp);
+   }
+  
+   else {
+        let pop = arr.pop();
+        insertSort(arr, temp);
+        arr.push(pop);
+    }
+  
+  return arr;
+}
+
+
+console.log(sortStack([9,3,4,1,-1,10]));

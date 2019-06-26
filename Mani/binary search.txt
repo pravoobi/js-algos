@@ -1,0 +1,89 @@
+"use strict";
+
+class BinarySearchTree {
+  constructor() {
+   
+    this.root = null;
+  }
+
+  insertNode(data, left = null, right = null) {
+    
+    let Node = {
+      data,
+      left,
+      right
+    };
+    
+    let currentNumberNode;
+
+    if (!this.root) {
+      
+      this.root = Node;
+    } 
+    else {
+      currentNumberNode = this.root;
+      
+      while (currentNumberNode) {
+      
+        if (data < currentNumberNode.data) {
+       
+          if (!currentNumberNode.left) {
+            currentNumberNode.left = Node;
+            break;
+          } else {
+          
+            currentNumberNode = currentNumberNode.left;
+          }
+          
+        } else if (data > currentNumberNode.data) {
+         
+          
+          if (!currentNumberNode.right) {
+            currentNumberNode.right = Node;
+            break;
+          } else {
+           
+            currentNumberNode = currentNumberNode.right;
+          }
+        } else {
+          console.log("Try Different Value");
+          break;
+        }
+      }
+    }
+  }
+}
+var Util = {
+
+  getHeight : function (root) {
+    if (root === null) { // Base case
+      return 0; 
+    }
+    return Math.max(Util.getHeight(root.left), Util.getHeight(root.right)) + 1;
+  },
+
+  isBalanced : function (root) {
+    if (root === null) { // Base case
+      return true;
+    }
+    var heightDifference = Math.abs(Util.getHeight(root.left) - Util.getHeight(root.right));
+    console.log(Util.getHeight(root.right))
+    if (heightDifference > 1) {
+      return false;
+    } else {
+     // console.log(Util.isBalanced(root.left) && Util.isBalanced(root.right))
+      return Util.isBalanced(root.left) && Util.isBalanced(root.right);
+    }
+  }
+};
+let BST = new BinarySearchTree();
+
+//tests
+BST.insertNode(8);
+BST.insertNode(3);
+BST.insertNode(10);
+BST.insertNode(1);
+BST.insertNode(6);
+console.log(BST);
+
+console.log(Util.isBalanced(BST.root));

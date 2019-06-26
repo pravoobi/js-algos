@@ -1,0 +1,190 @@
+// count length of cycle
+let uniqueArray = [];
+
+const countLength = (arr, startIndex) => {
+
+  if(startIndex >= 0 && !uniqueArray.includes(arr[startIndex])) {
+     uniqueArray.push(arr[startIndex]);
+     startIndex = arr[startIndex]       //update the next array value to startIndex
+     countLength(arr, startIndex);      //recursing the same method with array value and updated startIndex value
+  }
+  else if(arr[startIndex] === undefined) {
+    uniqueArray.push(arr[startIndex]);
+  }
+  if(uniqueArray.includes(undefined) || uniqueArray.length <= 1) {
+    return ': There is no cycle';
+  }
+  return uniqueArray.length;
+}
+
+console.log('1. The total count for cycle is ' + countLength([0,1], 0))
+
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+//3. best average Grade -> First Approach
+function bestAverageGradeFrist(arr) {
+  let obj = {};
+  for(let [index, value] of arr.entries()) {
+    value.forEach((item, index) => {
+       if(index % 2 ===0) {
+         if(obj[item]){
+           obj['dummy_'+ item] = value[index + 1];
+         }
+         else {
+         obj[item] = value[index + 1];
+         }
+       }
+    })
+  }
+  let maxValue =  Object.values(obj).reduce((a,b) => {
+     return Math.max(a,b).toString();
+  });
+  
+  let bestAvgName = Object.keys(obj).filter((key)=> { return obj[key] === maxValue });
+  return maxValue + ' by ' + (bestAvgName[0].indexOf('dummy') >= 0 ? bestAvgName[0].split('dummy_')[1] : bestAvgName[0]);
+}
+
+console.log( '2. a. Best average score is ' + bestAverageGradeFrist([["jerry","10"],["bob","50"],["jerry","55"],["eric","23"]]));
+
+
+//3. best average Grade using javascript Map instead of objects. This is the second approach 
+
+  let bestAvg = 0;
+  let name = '';  
+const bestAverageGrade = (arr) => {
+  let newMap =  new Map(arr);
+   for (let n of arr) {
+      if (newMap.get(n[0]) === n[1]) ''
+      else newMap.set(n[0]+'_dummy',n[1]);
+   }
+  newMap.forEach((item, value) => {
+    item = parseInt(item);
+    bestAvg = item >= bestAvg ? item : bestAvg;
+    name = item >= bestAvg ? value : name;
+   });
+  return bestAvg + ' by ' + name.split('_dummy')[0];
+}
+console.log( '2. b. Best average score is ' + bestAverageGrade([["bob","90"],["bob","98"],["jerry","95"],["eric","23"]]));
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+//Binary Search
+// binary search is like searching the number from the phone list based on the alphabetical order. 
+
+const binarySearch = (arr, searchValue) => {
+   let low = 0;
+   let high = arr.length;
+   arr = arr.sort((a,b) =>  { return a-b });   //sort the value from the given array
+  while(low <= high) {
+   let midValue = Math.floor((low+high)/2);   //get the mid value for each update
+   if(searchValue > arr[midValue]) {         //if the search value is greater consider second half of an array
+      low = midValue + 1;                      //so update the low value to mid + 1 .ie. from 0 to mid+1;
+   }
+  
+  else if (searchValue < arr[midValue]) {   //if the search value is less than the curent value consider first half                                             of an array
+      high = midValue - 1;
+    }
+  else if(searchValue == arr[midValue]) {   //if the value are found return true.
+      return true;
+  }
+}
+  return false;
+}
+
+console.log('3. The value given is exist : ' + binarySearch([10, 2 , 20, 30, 32,150], 20));
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+//Median of two arrays
+
+const findMedian = (arr) => {
+  
+  let mergedArray = arr.reduce((a,b) => {return [...a,...b]});  //merge two nested array into single array
+  let sortedArray = mergedArray.sort((a,b) => {return a-b });   //sorted the merged array.
+  
+  
+  //split the whole sorted array into two.
+  let firstHalfArray = sortedArray.slice(0, Math.floor(sortedArray.length/2));
+  let secondHalfArray = sortedArray.slice(Math.floor(sortedArray.length/2) , sortedArray.length);
+  
+  let median;
+  if(sortedArray.length % 2) {          // set the median value when the whole length is odd
+     let mid = Math.floor(sortedArray.length / 2);
+     median = sortedArray[mid];
+  }
+  else {        //when it is even then sum last value from first half and first value from second half /2;
+      median = (firstHalfArray[firstHalfArray.length - 1] + secondHalfArray[0]) / 2;
+  }
+
+  return median;
+}
+
+console.log('4. The Median value is : ' + findMedian([[1,22,13],[4,5,6]]));
+
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+// Run Length Encoding
+
+const findCharLength = (str) => {
+  str = str.toLowerCase();
+  let totalStringLength = '';
+  let duplicateValue = '';
+  
+  //splitting each character from the given string.
+    str.split('').map((item, index) => {
+      if(duplicateValue.includes(item)) {
+         return '';
+      }
+     else {
+      let length = str.split(item).length - 1;
+      totalStringLength += item + length;
+      duplicateValue += item;
+      }
+    })
+  return totalStringLength;
+}
+
+console.log('5. Each character length is: ' + findCharLength('SoftVision'));
+
+
+
+
+
+//Write a program to find the second most repeated character in a string.
+let str = 'abcabccacc';
+
+const getRepeatedChar = (str) => {
+  let obj = {};
+  str.split('').map((item, index) => {
+    
+    if(obj[item]) {
+      obj[item]++;
+    }
+    else{
+      obj[item] = 1;
+    }
+  });
+    let getMax =  Object.values(obj).sort((a,b) => {return a-b});
+  
+    let char = Object.keys(obj).filter((item,index) => {
+       if(parseInt(obj[item]) === getMax[1]) {
+          return item;
+       }
+    });
+  
+  return char;
+}
+
+
+console.log('The second most repeated char is: ' + getRepeatedChar(str));

@@ -1,0 +1,18 @@
+const func = (str) => {
+  let obj = {};
+  str.split('').forEach((item) => {
+      obj[item] ?  obj[item]++ : obj[item] = 1;
+  })
+  
+  let newArr = Object.keys(obj).sort((a,b) => {
+    return obj[b] - obj[a];
+  })
+  
+  let result = '';
+  newArr.forEach((item) => {
+    result += item.repeat(obj[item])
+  })
+  return result;
+}
+
+console.log(func('treesssa'))

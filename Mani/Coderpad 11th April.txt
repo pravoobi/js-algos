@@ -1,0 +1,57 @@
+let arr = ["cat", "dog", "tac", "god", "act"];
+
+
+let anagram = (arr) => {
+  let obj = {};
+  
+  arr.forEach((item,index) => {
+    let sortedVal = item.split('').sort().join('');
+     if(obj[sortedVal]) {
+        obj[sortedVal] += ',' + arr[index];
+     }
+    else {
+      obj[sortedVal] = arr[index];
+    }
+  })
+  
+ let val = Object.values(obj).join('');
+  
+ return val.replace(/,/g,' ');
+   
+}
+
+console.log(anagram(arr));
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+let maxHeight = ip => {
+  
+  let current = 0;
+  let sum = 0;
+  for(let i = 0; i< ip;i++) {
+    current = current + 1;
+    sum = sum + current;
+    if(sum > ip) {
+      return i;
+    }
+  }
+}
+
+
+console.log(maxHeight(2));
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+const findValue = arr => {
+  return arr.filter((item,value) => {
+       if(item.includes(1) && item.includes(2) && item.includes(3)) {
+         return item;
+       }
+    }).sort((a,b) => { return a-b });
+}
+
+console.log(findValue(['5', '1395', '1721298', '102030', '3215','123']))

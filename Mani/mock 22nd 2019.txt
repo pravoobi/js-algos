@@ -1,0 +1,127 @@
+// 3. Lily likes to play games with integers. She has created a new game where she determines the difference between a number and its reverse. For instance, given the number 12, its reverse is 21. Their difference is 9. The number 120 reversed is 21 , and their difference is 90.
+
+// She decides to apply her game to decision making. She will look at a numbered range of days and will only go to a movie on a beautiful day.
+
+// Given a range of numbered days,[i ... j]  and a number k, determine the number of days in the range that are beautiful. Beautiful numbers are defined as numbers where [i-reverse(i)] is evenly divisible by k. If a day's value is a beautiful number, it is a beautiful day. Print the number of beautiful days in the range.
+// Function Description:
+// beautifulDays has the following parameter(s):
+
+// i: the starting day number
+// j: the ending day number
+// k: the divisor
+
+// Example: 
+// Lily may go to the movies on days 20,21,22 and 23. We perform the following calculations to determine which days are beautiful:
+
+// Day 20 is beautiful because the following evaluates to a whole number: 20-02/6 = 18/6 = 3
+// Day 21 is not beautiful because the following doesn't evaluate to a whole number: 21-12/6 = 9/6 = 1.5
+// Day 22 is beautiful because the following evaluates to a whole number: 22-22/6 = 0/6 = 0
+// Day 23 is not beautiful because the following doesn't evaluate to a whole number: 23-32/6 = 9/6 = 1.5
+// Only two days, 20  and 22, in this interval are beautiful. Thus, we print 2 as our answer.
+
+// Input: 20 23 6
+// Ouput: 2
+
+
+
+
+const findBeautifulDays = (start, end, div) => {
+  let outputCount = 0;
+  let count = start;
+  while(count<=end) {
+    let reverseVal = parseInt(count.toString().split('').reverse().join(''));
+    let wholeDay = (count - reverseVal)/div;
+    if(wholeDay%1 === 0) {
+      outputCount++;
+    }
+     count++
+  }
+  return outputCount;
+}
+
+console.log(findBeautifulDays(20, 25, 6));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 1. Larry's Arrays
+// Larry has been given a permutation of a sequence of natural numbers incrementing from 1 as an array. He must determine whether the array can be sorted using the following operation any number of times:
+// Choose any  consecutive indices and rotate their elements in such a way that .
+// For example, if :
+// rotate 
+// [1,6,5,2,4,3]  [6,5,2]
+// [1,5,2,6,4,3]  [5,2,6]
+// [1,2,6,5,4,3]  [5,4,3]
+// [1,2,6,3,5,4]  [6,3,5]
+// [1,2,3,5,6,4]  [5,6,4]
+// [1,2,3,4,5,6]
+// On a new line for each test case, print YES if  can be fully sorted. Otherwise, print NO.
+
+// Example: 
+// 1: 3 1 2 -> rotate(3,1,2) -> [1,2,3]
+// 2: 1 3 4 2 -> rotate(3,4,2) -> [1,4,2,3]
+// 3: 1 4 2 3 -> rotate(4,2,3) -> [1,2,3,4]
+
+
+
+// array = [1,2,3,4] par=[2,3,4] => noSort => no
+// [1,2,4,3] = >parm[2,4,3] = nosort -> yes
+
+
+
+
+
+
+const findArray = (arr1, indices) => {
+  
+  let dummySorted = arr1.sort((a,b) => { return a-b});
+  
+ let ischeckInitialSorted =  arr1.every((item,index) => {
+     if(item === dummySorted[index]) {
+        return item;
+     }
+  })
+ if(ischeckInitialSorted) {
+   return 'NO';
+ }
+  
+  let mid = Math.floor(indices.length/2);
+  let firstIndices = indices.slice(0, mid);
+  let secondIndices = indices.slice(mid, indices.length); 
+  let rotatedIndices = [...secondIndices, ...firstIndices];
+
+  let index = arr1.indexOf(indices[0]);
+  let lastIndex = arr1.indexOf(indices[indices.length-1]);
+  let lastConcat = arr1.length - 1 === lastIndex ? [] : arr1.slice(lastIndex);
+  let concatRotatedIndices = [...arr1.slice(0,index), ...rotatedIndices, ...lastConcat];
+
+  let dummySortedArray = arr1.sort((a,b) => { return a-b});
+  
+ let isSorted =  concatRotatedIndices.every((item,index) => {
+     if(item === dummySortedArray[index]) {
+        return item;
+     }
+  })
+ 
+ if(isSorted) 
+    return 'YES';
+  else
+    return 'NO';
+} 
+
+
+
+console.log(findArray([1,3,4,2],[3,4,2]))

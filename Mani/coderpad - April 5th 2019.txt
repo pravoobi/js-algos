@@ -1,0 +1,324 @@
+
+
+//binary search tree with insert and search (put and contain)
+
+class BinarySearchTree {
+  constructor() {
+    this.root = null;
+    this.isSeachValueExist = false;
+  }
+  
+  
+  //insert the node
+  insertNode(data,left = null, right = null) {
+    let node = {
+      data,
+      left,
+      right
+    }
+    
+    let secondaryNode;
+    
+    if(this.root === null) {
+      this.root = node;
+    }
+    
+    else {
+      secondaryNode = this.root;
+      while(secondaryNode) {
+      if(data < secondaryNode.data) {
+         if(secondaryNode.left === null) {
+           secondaryNode.left = node;
+           break;
+         }
+        else {
+           secondaryNode = secondaryNode.left;
+        }
+      }
+      else if(data > secondaryNode.data) {
+              if(secondaryNode.right === null) {
+                secondaryNode.right = node;
+                break;
+              }
+        else {
+               secondaryNode = secondaryNode.right;  
+             }
+       }
+        else {
+          break;
+        }
+      }
+    }
+  }
+  
+  
+  //search the values in the tree
+  search(key) {
+    this.searchKey(this.root,key);
+  }
+  
+  searchKey(root, key) {
+    if(root === null) {
+      return null;
+    }
+    if(root.data === key) {
+       this.isSeachValueExist = true;
+    }
+    else if(key < root.data) {
+      this.searchKey(root.left, key);
+    }
+    else if (key > root.data) {
+      this.searchKey(root.right, key);
+    }
+  }
+  
+  
+  //order traversal (inorder, preorder, postorder)
+  inorder() {
+     this.inOrderTraversal(this.root);
+  }
+  
+  inOrderTraversal(root) {
+   if(root !== null) {
+      this.inOrderTraversal(root.left);
+      console.log('inorder:' + root.data);
+      this.inOrderTraversal(root.right);
+    }
+  }
+  
+  preorder() {
+     this.preOrderTraversal(this.root);
+  }
+  
+  preOrderTraversal(root) {
+   if(root !== null) {
+      console.log('preorder:' +root.data);
+      this.preOrderTraversal(root.left);
+      this.preOrderTraversal(root.right);
+    }
+  }
+  
+  postOrder() {
+     this.postOrderTraversal(this.root);
+  }
+  
+  postOrderTraversal(root) {
+   if(root !== null) {
+      this.postOrderTraversal(root.left);
+      this.postOrderTraversal(root.right);
+     
+      console.log('postorder:' +root.data);
+    }
+  }
+  
+  isHeightBalanced() {
+     return this.checkHeightBalanced(this.root);
+  }
+  
+  checkHeightBalanced(root) {
+   
+    if(root === null){
+      return 0;
+    }
+    let leftSide = this.getHeight(root.left);
+    let rightSide = this.getHeight(root.right);
+    if(Math.abs(leftSide - rightSide) <= 1) {
+      return true;
+    }
+    return false;
+  }
+  
+  getHeight = (root) => {
+    if(root === null) {
+      return 0;
+    }
+    return 1 + Math.max(this.getHeight(root.left), this.getHeight(root.right));
+  }
+}
+
+console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+console.log('BinarySearchTree');
+let bst = new BinarySearchTree();
+
+bst.insertNode(10);
+bst.insertNode(5);
+bst.insertNode(17);
+bst.insertNode(7);
+
+bst.insertNode(6);
+console.log(bst);
+
+console.log(bst.isHeightBalanced())
+
+console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+
+
+
+
+// Fibonacci series
+
+const fibonacci = () => {
+  let start = 0;
+  let totalLength = 6;
+  let a = 0, b= 1, current;
+  let out = '';
+  for(let i=0; i< totalLength; i++) {
+    
+    current = a + b; 
+    a = b;
+    b = current;
+    out += b + ',';
+  }
+  return out;
+}
+
+console.log('The fibonacci series upto length 6 is: '+ fibonacci());
+
+
+//Factorial
+const factorial = (key) => {
+  if(key === 0) {
+     return 1;
+  }
+    return key * factorial(key - 1);
+} 
+
+console.log('The Factorial of 5 is: '+ factorial(5));
+
+
+//linear sort
+const linearSort = (arr) => {
+  let key; let j=0;
+  for(let i = 1; i < arr.length; i++) {
+    key = arr[i];
+      j = i - 1;
+      while(j>=0 && arr[j] > key) {
+        [arr[j+1], arr[j]] = [arr[j], arr[j+1]]
+        j = j-1;
+      }
+   }
+  return arr;
+}
+
+// console.log(linearSort([10,3,100,-5,1,6]));
+
+
+
+//Implementation of Stack
+
+class Stack {
+  constructor() {
+     this.item = [];
+  }
+  
+  push = (key) => {
+     this.item.push(key);
+  }
+  
+  pop = () => {
+     this.item.pop();
+  }
+  
+  peek = () => {
+      return this.item[this.item.length - 1];
+  }
+  
+  printStack = () => {
+     let str = ''
+    for(let [index,value] of this.item.entries()) {
+      str += value + (index === this.item.length - 1 ? '' : ',');
+    }
+    return str;
+  }
+  
+  isEmpty = () => {
+    return this.item.length === 0;
+  }
+}
+
+let stack = new Stack();
+
+stack.push(10);
+stack.push(20);
+stack.push(5);
+stack.pop();
+stack.peek();
+
+console.log(stack.printStack());
+
+
+//implementation of Queue
+
+class Queue {
+  constructor() {
+    this.item = [];
+  }
+  
+  insert = (key) => {
+    this.item.push(key);
+  }
+  
+  remove = (key) => {
+    this.item.shift();
+  }
+  
+  front = () => {
+    return this.item[0];
+  }
+  
+   printQueue = () => {
+     let str = ''
+    for(let [index,value] of this.item.entries()) {
+      str += value + (index === this.item.length - 1 ? '' : ',');
+    }
+    return str;
+  }
+}
+
+let queue = new Queue();
+queue.insert(10);
+queue.insert(20);
+queue.insert(30);
+queue.remove()
+console.log(queue.front());
+
+
+var input = [[1,  2,   3,  4],
+             [5,  6,   7,  8],
+             [9,  10, 11, 12],
+             [13, 14, 15, 16]];
+
+let result= []
+function run(input, result) {
+    if (input.length == 0) {
+        return result;
+    }
+
+    // add the first row to result
+    result = result.concat(input.shift());
+
+    // add the last element of each remaining row
+    input.forEach(function(rightEnd) {
+        result.push(rightEnd.pop());
+    });
+  
+  console.log(result);
+
+    // add the last row in reverse order
+    result = result.concat(input.pop().reverse());
+  
+
+    // add the first element in each remaining row (going upwards)
+    var tmp = [];
+    input.forEach(function(leftEnd) {    
+        tmp.push(leftEnd.shift());
+    });
+    result = result.concat(tmp.reverse());
+
+  
+    return run(input, result);
+}
+
+var out = run(input, []);
+
+console.log('result', out);
