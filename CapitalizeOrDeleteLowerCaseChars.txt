@@ -1,0 +1,50 @@
+// You can perform the following operations on the string, 'a' :
+// 1. Capitalize zero or more of a's lowercase letters.
+// 2. Delete all of the remaining lowercase letters in 'a' .
+// Given two strings, 'a' and , 'b' determine if it's possible to make 'a' equal to 'b' as described. If so, print YES on a new line. Otherwise, print NO.
+
+// For example, given a= AbcDE and b=ABDE, in 'a' we can convert 'b' and delete 'c' to match''b' . If  a=AbcDE and b = AFDE , matching is not possible because letters may only be capitalized or discarded, not changed.
+
+// Function Description
+// Complete the function abbreviation. It must return either  or .
+
+// abbreviation has the following parameter(s):
+// a: the string to modify
+// b: the string to match
+
+// Input Format
+// DaBcd
+// ABC
+
+// Output: Yes 
+
+
+
+function stringCompare(a,b){
+  let [ string1,string2, temp] = [Array.from(a), Array.from(b),Array.from(a) ]
+  
+  
+  for(let i =0; i<string1.length ; i++){
+    if(string2.includes(string1[i])){
+      
+      
+    }else if(string2.includes(string1[i].toUpperCase())){
+      temp.splice(i,1,string1[i].toUpperCase())
+    }
+    else{
+      temp.splice(i,1);
+    }
+  }
+  
+  if(string2.length == temp.length && string2.join('') === temp.join('')) {
+    return 'YES'
+  }else{
+     return 'NO'
+  }
+ 
+    // return temp
+  
+  }
+console.log(stringCompare('AbcDE', 'ABDE'))
+console.log(stringCompare('DaBcd', 'ABC'))
+console.log(stringCompare('AbcDE', 'AFDE'))

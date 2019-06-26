@@ -1,0 +1,16 @@
+function moveZeroes(arr){
+  let [nonZeros, zeros] = [[], []]
+  arr.forEach(ele=>{
+    if(ele != 0){ nonZeros.push(ele)
+    }else{
+    zeros.push(ele)
+    }
+  })
+  
+  return [...nonZeros,...zeros ]
+
+} 
+
+console.log(moveZeroes([1,9,8,4,0,0,2,7,0,6,0,9,0]))
+
+sum of pairs of all products

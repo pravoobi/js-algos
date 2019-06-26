@@ -1,0 +1,59 @@
+// Nikita just came up with a new array game. The rules are as follows:
+// Initially, Nikita has an array of integers.
+// In each move, Nikita must partition the array into 2 non-empty contiguous parts such that the sum of the elements in the left partition is equal to the sum of the elements in the right partition. If Nikita can make such a move, she gets 1 point; otherwise, the game ends.
+
+// After each successful move, Nikita discards either the left partition or the right partition and continues playing by using the remaining partition as array arr .
+
+// Nikita loves this game and wants your help getting the best score possible. Given arr , can you find and print the maximum number of points she can score?
+
+// For example, Nikita starts with the array arr = [1,2,3,6]. She first splits it into a1=[1,2,3] and [6], then discards a2. arr= a1->a1 = [1,2], a2 =[3]. Discard a2 leaving arr=[1,2]. This cannot be further split, so Nikita scored 2.
+
+// Function Description
+
+// Complete the arraySplitting function. It should return an integer that reperesents the number of times Nikita can split the array.
+// arraySplitting has the following parameter(s):
+// 1. arr: an array of integers
+
+// Sample Input:
+
+// 3 3 3
+// 2 2 2 2
+// 4 1 0 1 1 0 1
+
+// Output:
+// 0
+// 2
+// 3
+
+
+let score = -1;
+
+function arraySplitting(newArray){
+  let [leftArray, rightArray, left, right] = [[], [], 0,0];
+  score++;
+    for(let i =0, j=  newArray.length-1; i <= j ; ){
+    
+    if(left<= right){
+      left += newArray[i];
+      leftArray.push(newArray[i])
+      i++;
+    }else{
+      right += newArray[j];
+      rightArray.push(newArray[j])
+      j--;
+    }
+  }
+ //if(left === right) score++;
+ return left === right ?  arraySplitting(leftArray.length > rightArray.length ? leftArray : rightArray) : score ;
+  
+ // return score
+ 
+
+}
+
+// console.log(arraySplitting([3, 3, 3]))
+console.log(arraySplitting([3,3,3,3]))
+
+
+
+

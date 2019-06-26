@@ -1,0 +1,31 @@
+// Given a pattern containing only I’s and D’s. I for increasing and D for decreasing. Devise an algorithm to print the minimum number following that pattern. Digits from 1-9 and digits can’t repeat.
+//   Input: D        Output: 21
+//    Input: I        Output: 12
+//    Input: DD       Output: 321
+//    Input: II       Output: 123
+//    Input: DIDI     Output: 21435
+//    Input: IIDDD    Output: 126543
+//    Input: DDIDDIID Output: 321654798
+
+// Since digits can’t repeat, there can be at most 9 digits in output.
+
+// Also number of digits in output is one more than number of characters in input. Note that the first character of input corresponds to two digits in output.
+
+const number = (str) => {
+  let result = '';
+  let output = [];
+  debugger
+  for(let i=0; i<=str.length;i++) {
+      output.push(i+1);
+    
+    if(i === str.length || str[i] === 'I') {
+    
+    while(output.length !== 0) {
+        result += (output.pop())
+      }
+    }
+  }
+  return result
+}
+
+console.log(number('DIDI'))

@@ -55,9 +55,14 @@ function qsort(arr){
 
     // partition array into element greater and lesser that the pivot
     // this can be optimized so you don't loop through the array twice
-    const low  = rest.filter(n => n <= p)
-    const high = rest.filter(n => n > p)
- console.log(p, arr, low, high)
+    // const low  = rest.filter(n => n <= p)
+    // const high = rest.filter(n => n > p)
+    const low = [], high =[];
+  rest.map(item =>{
+     if(item <= p) low.push(item);
+    else high.push(item)
+  })
+ // console.log(p, arr, low, high)
     // recurse on both partitions and reassemble as recursion unwinds
     return [...qsort(low), p, ...qsort(high)]
 }

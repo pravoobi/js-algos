@@ -1,3 +1,4 @@
+//wrong
 // Given a function with 2 parameters - an integer array, and a startIndex
 // Every element of array is greater than or equal to zero
 // Starting from array[startIndex], follow each element to the index points to
@@ -30,3 +31,181 @@ console.log(countlenghtOfCycle([1,0],0))
 console.log(countlenghtOfCycle([1,2,0],1))
 console.log(countlenghtOfCycle([1,2,1,0 ],1))
 
+
+///
+
+let out = [];
+let countLengthOfCycle1 = (arr,ind) => {
+  if(!out.includes(arr[ind])){
+    out.push(arr[ind]);
+    countLengthOfCycle1(arr,arr[ind])
+  }else{
+    out.push(arr[ind])
+  }
+  
+  return out.lastIndexOf(arr[ind]) - out.indexOf(arr[ind])
+}
+
+console.log(countLengthOfCycle1([1,2,3,2,5],3))
+console.log(out);
+//
+
+/* Problem Name is &&& Count Length Of Cycle &&& PLEASE DO NOT REMOVE THIS LINE. */
+
+/**
+ * Instructions to candidate.
+ *  1) Run this code in the REPL to observe its behaviour. The
+ *     execution entry point is main().
+ *  2) Consider adding some additional tests in doTestsPass().
+ *  3) Implement countLengthOfCycle() correctly.
+ *  4) If time permits, try to improve your implementation.
+ */
+
+var _ = require('lodash');
+
+/**
+ * countLengthOfCycle(arr, startIndex)
+ *
+ * You are given an integer array of size N. 
+ * Every element of the array is greater than or equal to 0.
+ * Starting from arr[startIndex], follow each element to the index it points to. 
+ * Continue to do this until you find a cycle. 
+ * Return the length of the cycle. If no cycle is found return -1
+ *
+ * Examples:
+ * countLengthOfCycle([1, 0], 0) == 2
+ * countLengthOfCycle([1, 2, 0], 0) == 3
+*/
+const countLengthOfCycle = function(arr, startIndex) {
+  //TODO: Implement Solution
+  let counter=0, another = 0, temp = -1, index = startIndex, passedIndex=[];
+  
+ while(temp != startIndex && another < arr.length ){
+       temp = arr[index];
+        counter++;
+        another++;
+        index = temp;
+        if(passedIndex.includes(temp)){
+          console.log("counter", counter)
+           return counter-1
+        }else{
+          passedIndex.push(temp)
+        }
+        
+        
+   // console.log(temp, counter)
+  }
+  // console.log(counter, 
+  return counter;
+}
+
+/**
+ * boolean doTestsPass()
+ * Returns true if all the tests pass. Otherwise returns false.
+ */
+const doTestsPass = () => {
+  let testsPassed = true;
+  let testCases = [
+  [[1, 0], 0, 2],
+  [[1, 2, 0], 0,  3],
+  [[4, 0, 0,4,3,0,1], 0, 2] 
+  ];
+  
+  _.forEach(testCases, (testCase) =>{
+  testsPassed &= 
+    countLengthOfCycle(testCase[0], testCase[1]) === testCase[2];
+  })
+  
+  return testsPassed;
+}
+
+/**
+ * Main execution entry.
+ */
+if(doTestsPass())
+{
+  console.log("All tests pass!");
+}
+else
+{
+  console.log("There are test failures.");
+}
+
+
+
+
+
+/* Problem Name is &&& Count Length Of Cycle &&& PLEASE DO NOT REMOVE THIS LINE. */
+
+/**
+ * Instructions to candidate.
+ *  1) Run this code in the REPL to observe its behaviour. The
+ *     execution entry point is main().
+ *  2) Consider adding some additional tests in doTestsPass().
+ *  3) Implement countLengthOfCycle() correctly.
+ *  4) If time permits, try to improve your implementation.
+ */
+
+var _ = require('lodash');
+
+/**
+ * countLengthOfCycle(arr, startIndex)
+ *
+ * You are given an integer array of size N. 
+ * Every element of the array is greater than or equal to 0.
+ * Starting from arr[startIndex], follow each element to the index it points to. 
+ * Continue to do this until you find a cycle. 
+ * Return the length of the cycle. If no cycle is found return -1
+ *
+ * Examples:
+ * countLengthOfCycle([1, 0], 0) == 2
+ * countLengthOfCycle([1, 2, 0], 0) == 3
+*/
+const countLengthOfCycle = function(arr, startIndex) {
+  //TODO: Implement Solution
+  let len = arr.length;
+  let visitedIndex=[], counter=0, temp=startIndex, i =0
+  while(i < len){
+    
+    console.log(arr, counter, visitedIndex)
+    if(visitedIndex.includes(arr[temp])) return counter;
+    counter++;
+    visitedIndex.push(arr[temp]);
+    temp = arr[temp]
+    i++;
+  }
+  console.log(arr, counter, visitedIndex)
+  return counter;
+}
+
+/**
+ * boolean doTestsPass()
+ * Returns true if all the tests pass. Otherwise returns false.
+ */
+const doTestsPass = () => {
+  let testsPassed = true;
+  let testCases = [
+  [[1, 0], 0, 2],
+  [[1, 2, 0], 0,  3],
+  [[4, 0, 0,4,3,0,1], 0, 2] 
+  ];
+  
+  _.forEach(testCases, (testCase) =>{
+  testsPassed &= 
+    countLengthOfCycle(testCase[0], testCase[1]) === testCase[2];
+  })
+  
+  return testsPassed;
+}
+
+/**
+ * Main execution entry.
+ */
+if(doTestsPass())
+{
+  console.log("All tests pass!");
+}
+else
+{
+  console.log("There are test failures.");
+}

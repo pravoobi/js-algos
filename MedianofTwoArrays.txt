@@ -16,3 +16,23 @@ function MedianoftwoArrays(arr1, arr2){
 
 console.log(MedianoftwoArrays([1, 2, 3, 4, 5],[2, 3, 4, 5, 6,7]))
 console.log(MedianoftwoArrays([0,8,6,7,934949, 2, 4543, 445, 5],[234534, 3345, 4556656, 5453453, 6,9090047]))
+
+
+
+/* Median in two sorted and non sorted arrays, with same and different sizes.
+
+Input - ([1,2,3,4],[5,6,7,8,9]), median - 4.5
+
+input - ([1,3,5],[4,2]), median - 3
+
+*/
+function MedianOfArrays(arr1, arr2){
+  let [fullArray, length, mid] = [[...arr1, ...arr2], 0, 0 ];
+  fullArray.sort((a,b) => a-b);
+  length = fullArray.length;
+  mid = Math.floor(length/2)
+  return length%2 == 0 ? (fullArray[mid-1]+fullArray[mid])/2 : fullArray[mid] ;
+
+}
+
+console.log(MedianOfArrays([1,2,3,4],[5,6,7,8]))

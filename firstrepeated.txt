@@ -18,3 +18,38 @@ var c = ["apple", "orange", "grape", "orange", "grape"];
 console.log(firstRepeat(a))
 console.log(firstRepeat(b))
 console.log(firstRepeat(c))
+
+var firstRepeatingLetter = function(str) {
+ 
+  for(i=0; i<str.length; i++) {
+    if(str.indexOf(str[i], i+1) >-1) {
+      return str[i];
+    }
+  }
+}
+
+// firstRepeatingLetter("Grace Hopper Academy") // => "r"
+// firstRepeatingLetter("Shanna Gregory") // => "a"
+firstRepeatingLetter("David & Nimit") // => "i"
+
+
+function firstRepeat(arr){
+  let another = [], val = -1;
+  for(let i =0; i < arr.length; i++){
+      if(another.includes(arr[i])) {
+      console.log(another.includes(arr[i]), arr[i])
+    return arr[i];
+     
+    }
+    
+    another.push(arr[i])
+    
+  }
+  return -1;
+}
+var a = [2, 1, 3, 5, 3, 2,4,6,3,8,3];
+var b = [2, 4, 3, 5, 1];
+var c = ["apple", "orange", "grape", "orange", "grape"];
+console.log(firstRepeat(a))
+console.log(firstRepeat(b))
+console.log(firstRepeat(c))

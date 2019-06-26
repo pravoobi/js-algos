@@ -1,0 +1,19 @@
+// Write a JavaScript function to convert a string in abbreviated form.
+// input: "Robin Singh"
+// output:// "Robin S."
+//input: "Mahendra Singh Dhoni"
+//output: "Mahendra Singh D."
+
+function lastNames(string){
+  let stringArray = string.split(" ");
+  if(stringArray.length === 1) return stringArray[0].charAt(0)+'.';
+  let c = stringArray[stringArray.length-1].charAt(0);
+  let newArray = stringArray.slice(0,stringArray.length-1)
+  newArray.push(c+'.');
+  let newString = newArray.join(' ');
+  return newString
+
+}
+
+console.log(lastNames("Robin Singh"))
+console.log(lastNames("Robin"))
