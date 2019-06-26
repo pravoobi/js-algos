@@ -1,0 +1,41 @@
+//Implement a function 'Compose'
+//Compose([a,b,c]) will return a new function which is `a(b(c))`
+
+'use strict';
+
+var chai = require('chai');
+var Mocha = require('mocha');
+var mocha = new Mocha({ui:'bdd'});
+var assert = chai.assert;
+
+//compose function takes in a list of functions and returns which is the composition of each
+function compose(input){
+  //TODO - fill this
+  let result = 1;
+  let len = input.length;
+  let start = 0;
+  while(start<len){
+  result = input[start](result);
+  }
+  return result;
+}
+
+mocha.suite.emit('pre-require', this,'solution', mocha);
+
+describe('"compose" Test Suite', function(){
+  function addOne(a){
+    return a + 1;
+  }
+  function timesTwo(a){
+    return a * 2;
+  }
+  
+  it('takes a list of two single arg functions', function(){
+    var actual = compose([addOne, timesTwo])(1);
+    assert.equal(actual, 3, '(1 * 2) + 1 === 3');
+  });
+});
+
+mocha.run(function(){});
+
+//Refer function composition in javascript 
