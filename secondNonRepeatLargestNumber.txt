@@ -1,0 +1,14 @@
+
+function secondLargest(arr){
+  let firstLargest = Number.MIN_SAFE_INTEGER ;
+  let secondLargest = Number.MIN_SAFE_INTEGER - 1;
+  const newSet = new Set(arr);
+  if(newSet.size === 1){
+    return -1;
+  } else {
+    let b = [...newSet]
+    return b[1];
+  }
+}
+console.log(secondLargest([2,2,2]));
+console.log(secondLargest([2,1,1,2]));
